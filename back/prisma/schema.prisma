@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
+  email            String             @unique
+  password         String
+  role             Role
+  resetToken       String?
+  expiresAt        DateTime?
+  TourismPotential TourismPotential[]
+}
+
+model TourismPotential {
+  id              String           @id @default(uuid())
+  name            String
+  description     String
+  userId          String
+  potentialTypeId String
+  x               Float
+  y               Float
+  webSite         String?
+  type            PotentialType    @relation(fields: [potentialTypeId], references: [id])
+  user            User             @relation(fields: [userId], references: [id])
+  Image           Image[]
+  Document        Document[]
+  GeoCoordinates  GeoCoordinates[]
+  VideoMaterials  VideoMaterials[]
+}
+
+model Image {
+  id                 String           @id @default(uuid())
+  imageURL           String
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  tourismPotentialId String
+}
+
+model Document {
+  id                 String           @id @default(uuid())
+  name               String
+  docURL             String
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  tourismPotentialId String
+}
+
+model GeoCoordinates {
+  id                 String           @id @default(uuid())
+  x                  Float
+  y                  Float
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  tourismPotentialId String
+}
+
+model VideoMaterials {
+  id                 String           @id @default(uuid())
+  videoURL           String
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  tourismPotentialId String
+}
+
+model PotentialType {
+  id               String             @id @default(uuid())
+  name             String
+  color            String
+  iconURL          String
+  TourismPotential TourismPotential[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}

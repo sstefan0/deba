@@ -1,0 +1,52 @@
+{
+  "user": [
+    {
+      "id": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "firstName": "Stefan",
+      "lastName": "Saratlija",
+      "email": "saratlija.stefan6@gmail.com",
+      "password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "role": "ADMIN"
+    },
+    {
+      "id": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
+      "firstName": "Marko",
+      "lastName": "Markovic",
+      "email": "mmarkovic2@gmail.com",
+      "password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "role": "USER"
+    }
+  ],
+  "potentialType": [
+    {
+      "id": "bb5d4511-b1f6-4e81-b1d7-1702f18843f3",
+      "name": "Prirodna znamenitost",
+      "color": "#FFFFFF",
+      "iconURL": "adswww"
+    },
+    {
+      "id": "468a557a-ef4e-4729-bb4b-37cbe107004e",
+      "name": "Kulturno-istorijska znamenitost",
+      "color": "#FFFFFF",
+      "iconURL": "adswww"
+    },
+    {
+      "id": "033af66b-dec3-4475-adcb-e846947ea230",
+      "name": "Restoran",
+      "color": "#FFFFFF",
+      "iconURL": "adswww"
+    },
+    {
+      "id": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
+      "name": "Biciklisticka staza",
+      "color": "#FFFFFF",
+      "iconURL": "adswww"
+    },
+    {
+      "id": "3cc0f693-de40-4362-911c-9a4e675b1cce",
+      "name": "Planinarska staza",
+      "color": "#FFFFFF",
+      "iconURL": "adswww"
+    }
+  ]
+}
