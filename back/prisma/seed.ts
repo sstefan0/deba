@@ -8,14 +8,24 @@ const users = seedData.user.map((user) => ({
 }));
 
 async function main() {
-  const deleteUsers = prisma.user.deleteMany();
   const deleteTypes = prisma.potentialType.deleteMany();
+  const deleteUsers = prisma.user.deleteMany();
+  const deleteSpots = prisma.tourismPotential.deleteMany();
+  const deleteNews = prisma.newsArticle.deleteMany();
 
-  await deleteUsers;
+  await deleteNews;
+  await deleteSpots;
   await deleteTypes;
+  await deleteUsers;
 
   await prisma.user.createMany({ data: users });
   await prisma.potentialType.createMany({ data: seedData.potentialType });
+  await prisma.tourismPotential.createMany({ data: seedData.touristSpot });
+  await prisma.image.createMany({ data: seedData.image });
+  await prisma.videoMaterials.createMany({ data: seedData.videos });
+  await prisma.document.createMany({ data: seedData.documents });
+  await prisma.geoCoordinates.createMany({ data: seedData.coordinates });
+  await prisma.newsArticle.createMany({ data: seedData.news });
 }
 
 main()

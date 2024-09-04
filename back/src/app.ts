@@ -5,7 +5,9 @@ import cors from "cors";
 import authRouter from "./router/auth-router";
 import swaggerjsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { version } from "os";
+import touristSpotRouter from "./router/tourist-spot-router";
+import uploadRouter from "./router/uploads-router";
+import newsRouter from "./router/news-router";
 
 const app = express();
 const port = process.env.PORT;
@@ -56,6 +58,9 @@ app.use(express.json());
 const swaggerDocs = swaggerjsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/auth", authRouter);
+app.use("/api/touristSpot", touristSpotRouter);
+app.use("/api/upload", uploadRouter);
+app.use("/api/news", newsRouter);
 
 app.use(ErrorHandler);
 

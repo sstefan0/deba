@@ -1,4 +1,5 @@
 import { Role } from "@prisma/client";
+import { query } from "express";
 import { PassThrough } from "stream";
 import * as yup from "yup";
 
@@ -29,5 +30,18 @@ export const resetPasswordSchema = yup.object({
   body: yup.object({
     password: yup.string().min(8).required(),
     token: yup.string().required(),
+  }),
+});
+
+export const updateUserSchema = yup.object({
+  query: yup.object({
+    id: yup.string().uuid().required(),
+  }),
+  body: yup.object({
+    firstName: yup.string(),
+    lastName: yup.string(),
+    email: yup.string().email(),
+    password: yup.string().min(8),
+    role: yup.string().oneOf([Role.ADMIN, Role.USER]),
   }),
 });

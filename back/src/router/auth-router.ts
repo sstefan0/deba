@@ -1,9 +1,13 @@
 import express from "express";
 import {
   forgotPasswordController,
+  getAccountByIdController,
+  getAllAccountsController,
   loginController,
   registerController,
   resetPasswordController,
+  toggleActiveAccountController,
+  updateAccountController,
 } from "../controller/auth-controller";
 import authorize from "../middleware/auth-middleware";
 import { Role } from "@prisma/client";
@@ -13,7 +17,9 @@ import {
   loginSchema,
   registerSchema,
   resetPasswordSchema,
+  updateUserSchema,
 } from "../schemas/auth-schema";
+import { getByIdSchema } from "../schemas/tourist-spot-schema";
 
 const router = express.Router();
 
@@ -175,5 +181,27 @@ router.post(
   "/resetPassword",
   validate(resetPasswordSchema),
   resetPasswordController
+);
+
+router.put(
+  "/toggleActive",
+  validate(getByIdSchema),
+  authorize([Role.ADMIN]),
+  toggleActiveAccountController
+);
+
+router.put(
+  "/updateUser",
+  validate(updateUserSchema),
+  authorize([Role.ADMIN, Role.USER]),
+  updateAccountController
+);
+
+router.get("/getUsers", authorize([Role.ADMIN]), getAllAccountsController);
+router.get(
+  "/getById",
+  authorize([Role.ADMIN, Role.USER]),
+  validate(getByIdSchema),
+  getAccountByIdController
 );
 export default router;

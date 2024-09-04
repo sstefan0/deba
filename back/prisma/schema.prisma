@@ -14,9 +14,11 @@ model User {
   email            String             @unique
   password         String
   role             Role
+  active           Boolean            @default(true)
   resetToken       String?
   expiresAt        DateTime?
   TourismPotential TourismPotential[]
+  NewsArticle      NewsArticle[]
 }
 
 model TourismPotential {
@@ -25,11 +27,11 @@ model TourismPotential {
   description     String
   userId          String
   potentialTypeId String
-  x               Float
-  y               Float
+  lat             Float
+  lon             Float
   webSite         String?
-  type            PotentialType    @relation(fields: [potentialTypeId], references: [id])
-  user            User             @relation(fields: [userId], references: [id])
+  type            PotentialType    @relation(fields: [potentialTypeId], references: [id], onDelete: Cascade)
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   Image           Image[]
   Document        Document[]
   GeoCoordinates  GeoCoordinates[]
@@ -37,32 +39,36 @@ model TourismPotential {
 }
 
 model Image {
-  id                 String           @id @default(uuid())
+  id                 String            @id @default(uuid())
   imageURL           String
-  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
-  tourismPotentialId String
+  tourismPotential   TourismPotential? @relation(fields: [tourismPotentialId], references: [id], onDelete: Cascade)
+  tourismPotentialId String?
+  newsArticle        NewsArticle?      @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
+  newsArticleId      String?
 }
 
 model Document {
-  id                 String           @id @default(uuid())
+  id                 String            @id @default(uuid())
   name               String
   docURL             String
-  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
-  tourismPotentialId String
+  tourismPotential   TourismPotential? @relation(fields: [tourismPotentialId], references: [id], onDelete: Cascade)
+  tourismPotentialId String?
+  newsArticle        NewsArticle?      @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
+  newsArticleId      String?
 }
 
 model GeoCoordinates {
   id                 String           @id @default(uuid())
-  x                  Float
-  y                  Float
-  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  lat                Float
+  lon                Float
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id], onDelete: Cascade)
   tourismPotentialId String
 }
 
 model VideoMaterials {
   id                 String           @id @default(uuid())
   videoURL           String
-  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id])
+  tourismPotential   TourismPotential @relation(fields: [tourismPotentialId], references: [id], onDelete: Cascade)
   tourismPotentialId String
 }
 
@@ -72,6 +78,17 @@ model PotentialType {
   color            String
   iconURL          String
   TourismPotential TourismPotential[]
+}
+
+model NewsArticle {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  createdAt   DateTime   @default(now())
+  userId      String
+  author      User       @relation(fields: [userId], references: [id])
+  Image       Image[]
+  Document    Document[]
 }
 
 enum Role {

@@ -11,6 +11,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { generateHTMLResetMessage, sendEmail } from "../util/mail-sender";
+import { IdQueryDto } from "../dto/tourist-spot-dto";
 
 export const loginController = async (
   req: Request,
@@ -20,7 +21,7 @@ export const loginController = async (
   try {
     const loginData = req.body as LoginDto;
     const user = await prisma.user.findFirst({
-      where: { email: loginData.email },
+      where: { email: loginData.email, active: true },
     });
 
     if (!user) throw new HttpException(404, "User not found.");
@@ -133,6 +134,108 @@ export const resetPasswordController = async (
     });
 
     res.status(200).json({ message: "Password changed successfully" });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const toggleActiveAccountController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.query as unknown as IdQueryDto).id;
+
+    const user = await prisma.user.findFirst({ where: { id: userId } });
+    if (!user) throw new HttpException(404, "User not found");
+    const newStatus = !user.active;
+    const deactivatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { active: newStatus },
+    });
+
+    res.status(200).json(deactivatedUser);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const updateAccountController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.query as unknown as IdQueryDto).id;
+
+    if (req.user.id != userId && req.user.role != "ADMIN")
+      throw new HttpException(401, "Unauthorized");
+    const userData = req.body as RegisterDto;
+
+    const hashedPasswrod: string | null = userData.password
+      ? await bcrypt.hash(userData.password, 10)
+      : null;
+    let updatedUser;
+    if (hashedPasswrod) {
+      updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { ...userData, password: hashedPasswrod },
+      });
+    } else {
+      updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { ...userData },
+      });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getAllAccountsController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userAccounts = await prisma.user.findMany();
+    const formattedResponse = userAccounts.map((user) => ({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+      active: user.active,
+    }));
+    res.status(200).json(formattedResponse);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getAccountByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.query as unknown as IdQueryDto).id;
+    const user = await prisma.user.findFirst({ where: { id: userId } });
+    if (!user) throw new HttpException(404, "User account not found.");
+    const formattedResponse = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+      active: user.active,
+    };
+    res.status(200).json(formattedResponse);
   } catch (e) {
     next(e);
   }

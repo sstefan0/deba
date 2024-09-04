@@ -5,7 +5,7 @@
       "firstName": "Stefan",
       "lastName": "Saratlija",
       "email": "saratlija.stefan6@gmail.com",
-      "password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "password": "$2a$12$QmuX3UWz.JjyNQLUwdoZJ.fxXzN8nTlxMaaM7y9dXYX9WSmKqqk5y",
       "role": "ADMIN"
     },
     {
@@ -13,7 +13,7 @@
       "firstName": "Marko",
       "lastName": "Markovic",
       "email": "mmarkovic2@gmail.com",
-      "password": "$2a$10$mTBCcgtwqAHwrJnHJd7XNuoaCp9tKle2Z1q1tVI7Ds3jVYOLb0dhu",
+      "password": "$2a$12$QmuX3UWz.JjyNQLUwdoZJ.fxXzN8nTlxMaaM7y9dXYX9WSmKqqk5y",
       "role": "USER"
     }
   ],
@@ -21,32 +21,275 @@
     {
       "id": "bb5d4511-b1f6-4e81-b1d7-1702f18843f3",
       "name": "Prirodna znamenitost",
-      "color": "#FFFFFF",
-      "iconURL": "adswww"
+      "color": "#32CD32",
+      "iconURL": "park.png"
     },
     {
       "id": "468a557a-ef4e-4729-bb4b-37cbe107004e",
       "name": "Kulturno-istorijska znamenitost",
-      "color": "#FFFFFF",
-      "iconURL": "adswww"
+      "color": "#B8860B",
+      "iconURL": "historica-pin.png"
     },
     {
       "id": "033af66b-dec3-4475-adcb-e846947ea230",
       "name": "Restoran",
-      "color": "#FFFFFF",
-      "iconURL": "adswww"
+      "color": "#FF4500",
+      "iconURL": "restaurant.png"
     },
     {
       "id": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
-      "name": "Biciklisticka staza",
-      "color": "#FFFFFF",
-      "iconURL": "adswww"
+      "name": "Biciklistička staza",
+      "color": "#FF6347",
+      "iconURL": "bicycle.png"
     },
     {
       "id": "3cc0f693-de40-4362-911c-9a4e675b1cce",
       "name": "Planinarska staza",
-      "color": "#FFFFFF",
-      "iconURL": "adswww"
+      "color": "#2E8B57",
+      "iconURL": "mountain.png"
+    }
+  ],
+  "touristSpot": [
+    {
+      "id": "3a97937e-c388-4357-b8b4-c33725c584a5",
+      "name": "Most Mehmed-paše Sokolovića",
+      "description": "Višegradska ćuprija na Drini je zadužbina velikog vezira Mehmed-paše Sokolovića (tur. Sokollu Mehmet Paşa, 1505. ili 1506-1579). On je jedan od velikih osmanskih vojskovođa porijeklom iz Bosne. Rodio se u selu Sokolovići pored Rudog 1505. ili 1506, a kao dijete pravoslavnih roditelja. U to vrijeme postojao je običaj poznat kao Divširma, odnosno „Danak u krvi”. Srpska djeca su na silu otimana i odvođena u Tursku gdje su prevođena u islam i školovana u njihovim vojnim školama gdje su postajali Janjičari, elitni vojnici turskog carstva. Tako je iz okoline Višegrada kao dijete odveden i Bajica Sokolović i dobija ime Mehmed. On će kasnije zahvaljujući svojoj sposobnosti postati oficir osmanske vojske, a na vrhuncu svoje moći postaje veliki vezir, odnosno premijer države po današnjim standardima. Na vrhuncu svoje moći naređuje da se u Višegradu na Drini sagradi most kome ravna nema. Most je izgrađen u periodu od 1571. do 1577. godine, a gradio ga je tada najčuveniji turski arhitekta Kodža Mimar Sinan. Izgrađen je u istočnjačkom stilu i predstavlja remek dijelo tadašnjeg graditeljstva. Ima 11 lukova sa blagim usponom prema sredini i silaznom rampom na lijevoj obali. Iznad lukova čitavom dužinom mosta proteže se profilisani vijenac iznad koga je ograda mosta. Ukupna dužina iznosi 179,5 m, visina nad normalnim vodostajem rijeke 15,40 m a širina mosta 6,30 metara. Most je građen od kamena, sedre, odnosno bigra, koji je dovežen iz Višegradske Banje. Iznad šestog stuba nalaze se sa obe strane proširenja. Na prilaznoj rampi lijeve obale nalaze se tri otvora završena prolomljenim lukovima. Na sredini mosta je izgrađena sofa koja je predviđena za odmor prolaznika, a preko puta sofe je ugrađen kameni portal. Na sredini mosta se nekada nalazila kućica sa drvenom kapijom i mostovskom stražom, pa je zbog toga ovaj dio mosta nazvan kapija. Ovdje se nalaze i dvije ploče od bijelog mramora sa stihovima pjesnika Nihadija na arapskom pismu, koji govore o graditelju i godini izgradnje.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "468a557a-ef4e-4729-bb4b-37cbe107004e",
+      "lat": 43.7824988474958,
+      "lon": 19.2877605482346
+    },
+    {
+      "id": "9b1f7d6b-5bda-4f2b-96a2-5f7b5dd2a771",
+      "name": "Andrićgrad",
+      "description": "Andrićgrad, also known as Kamengrad, is a town dedicated to the Nobel Prize-winning author Ivo Andrić, located near the famous Mehmed Paša Sokolović Bridge. The town was built by renowned filmmaker Emir Kusturica and opened in 2014. The architectural style of Andrićgrad is a mix of different historical periods and styles that have marked the history of Višegrad, from the Ottoman Empire to the Austro-Hungarian period. The town features cobblestone streets, a church, a theatre, a multiplex cinema, a hotel, and a gallery, among other attractions. Visitors can explore the rich cultural heritage of the region and learn more about Andrić's life and work.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "468a557a-ef4e-4729-bb4b-37cbe107004e",
+      "lat": 43.780003,
+      "lon": 19.283301
+    },
+    {
+      "id": "4c0a43b3-f4e3-47d2-a8f7-d1f3b89a3c74",
+      "name": "Višegrad Spa (Višegradska Banja)",
+      "description": "Višegrad Spa, also known as Višegradska Banja, is a popular health resort located near the town of Višegrad. The spa is renowned for its therapeutic waters, which have been used for centuries to treat various ailments, including rheumatism and skin conditions. The thermal waters are rich in minerals and have a temperature of around 34°C. The spa offers a range of treatments, including hydrotherapy, massages, and wellness programs. Surrounded by lush nature, the spa provides a serene environment for relaxation and rejuvenation.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "033af66b-dec3-4475-adcb-e846947ea230",
+      "lat": 43.7888,
+      "lon": 19.2967
+    },
+    {
+      "id": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "name": "Visegrad Mountain Trail",
+      "description": "A scenic hiking trail starting from the outskirts of Visegrad and leading up through the lush forests of the surrounding hills. The trail is approximately 10 kilometers long, with an elevation gain of 500 meters. It features beautiful views of the Drina River and the surrounding countryside. The route is well-marked and includes several resting spots with benches and information panels about local flora and fauna.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "3cc0f693-de40-4362-911c-9a4e675b1cce",
+      "lat": 43.78,
+      "lon": 19.29
+    },
+    {
+      "id": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "name": "Visegrad Scenic Biking Loop",
+      "description": "A picturesque 20-kilometer biking loop around Visegrad, offering a mix of paved roads and scenic trails. The route starts and ends at the Visegrad Park, featuring beautiful views of the Drina River and the surrounding countryside. Suitable for cyclists of all levels, the loop includes several points of interest, including historical sites and natural landmarks.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
+      "lat": 43.782,
+      "lon": 19.29
+    }
+  ],
+  "image": [
+    {
+      "id": "006ede31-3794-4672-95c6-9e86d1ec6a86",
+      "imageURL": "https://drive.google.com/thumbnail?id=163KT_EbS_P6PkBPsMWXdTBuZ90AgJajm&sz=w1000",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    },
+    {
+      "id": "0af09724-232e-4c81-b4e5-6efae56682c9",
+      "imageURL": "https://drive.google.com/thumbnail?id=1YiQ4UcN_hEyRrZR0Qgu7v5G3FaCoUH-d&sz=w1000",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    },
+    {
+      "id": "acc7f06d-5745-4788-8020-33ab093d5ccb",
+      "imageURL": "https://drive.google.com/thumbnail?id=19qBVtbJqQYIeY6asUtAxtC6UXHLFxyu7&sz=w1000",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    },
+    {
+      "id": "ae08e2f8-967b-452f-91d5-9a3e5c7a0754",
+      "imageURL": "https://drive.google.com/thumbnail?id=1dWaBBblJobjRzv7io78QSSrhrbKV3pkX&sz=w1000",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    }
+  ],
+  "videos": [
+    {
+      "id": "69367fd8-851d-4225-86f3-222320d82d08",
+      "videoURL": "https://www.youtube.com/watch?v=MdrFVRE1EAA",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    },
+    {
+      "id": "4b5bc062-b332-4836-a0d8-2d8ea2cf95c0",
+      "videoURL": "https://www.youtube.com/watch?v=WRwodg1GtJ4",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    }
+  ],
+  "documents": [
+    {
+      "id": "3eb669d7-be21-4b9c-b2e0-d8e950ab195c",
+      "name": "White Blue Simple Modern Business Proposal Pitch Deck Presentation Design.pdf",
+      "docURL": "https://drive.google.com/uc?export=download&id=18SPw_HWpwDxgkWozGZ8A-fvhSKknWVIe",
+      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    }
+  ],
+  "coordinates": [
+    {
+      "id": "0738a8fb-3f67-4451-af70-86bc51eace44",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "lat": 43.78,
+      "lon": 19.29
+    },
+    {
+      "id": "77d53f4f-da0e-4410-9630-b4dbe2d94142",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "lat": 43.782,
+      "lon": 19.292
+    },
+    {
+      "id": "88c1202a-4f3f-4869-9463-58fad2cec702",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "lat": 43.785,
+      "lon": 19.295
+    },
+    {
+      "id": "e222a724-f682-4b13-9d80-af8c6b6f317a",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "lat": 43.788,
+      "lon": 19.297
+    },
+    {
+      "id": "3917112b-faed-4069-b0ee-2627ac60ed8d",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
+      "lat": 43.79,
+      "lon": 19.3
+    },
+    {
+      "id": "e50dee52-fca9-4041-8dd7-9d8fa4640c92",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.782,
+      "lon": 19.29
+    },
+    {
+      "id": "705f60c6-5eea-4673-b425-f4ef88a7d6d4",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.784,
+      "lon": 19.292
+    },
+    {
+      "id": "716a7c77-ccf7-46d5-b3b5-df8ddf12f20e",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.786,
+      "lon": 19.295
+    },
+    {
+      "id": "6a461cd6-7332-4084-97c6-db651a0aca70",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.788,
+      "lon": 19.298
+    },
+    {
+      "id": "f2a6a04b-a0ba-4204-9579-cd9ba81498e7",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.79,
+      "lon": 19.3
+    },
+    {
+      "id": "2aa548b8-c165-49e7-9c6a-b2f3e4a8c17d",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423",
+      "lat": 43.792,
+      "lon": 19.302
+    }
+  ],
+  "news": [
+    {
+      "id": "583a4113-874b-4add-9bda-00f6b80421c0",
+      "title": "Nova turistička staza u Višegradu",
+      "description": "Grad Višegrad je otvorio novu turističku stazu koja vodi kroz prelepe predele oko Drine. Staza je dugačka 10 kilometara i nudi spektakularne poglede na reku i okolne planine. Idealan je za ljubitelje prirode i sve one koji žele da uživaju u svežem vazduhu i zelenilu. Otvorenje staze biće u subotu, 10. oktobra, i svi su dobrodošli da prisustvuju.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-01T10:00:00Z"
+    },
+    {
+      "id": "69cd0288-7e16-4422-bfe6-bdfbb3e18f14",
+      "title": "Festival tradicionalne hrane u Višegradu",
+      "description": "U Višegradu će se od 15. do 17. oktobra održati festival tradicionalne hrane. Posetioci će imati priliku da probaju razne specijalitete pripremljene prema starim receptima. Festival će takođe uključivati muzičke nastupe i zanatske radnje, pružajući sveobuhvatan doživljaj lokalne kulture. Ulaz je besplatan za sve posetioce.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-05T09:00:00Z"
+    },
+    {
+      "id": "8398217c-3896-4ff9-ba86-c9f521c20a73",
+      "title": "Otvorena nova biciklistička staza",
+      "description": "Nova biciklistička staza dugačka 15 kilometara otvorena je u Višegradu. Staza se proteže kroz prelepe krajeve pored Drine i omogućava biciklistima uživanje u prirodnim lepotama. Ceremonija otvorenja biće u petak, 20. oktobra, uz specijalne popuste za prvih 100 biciklista.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-08T11:30:00Z"
+    },
+    {
+      "id": "efe8a61c-fa9b-4265-9eb4-2e343e5bd4b5",
+      "title": "Revizija istorijskih spomenika",
+      "description": "Grad Višegrad pokreće reviziju i obnovu istorijskih spomenika u centru grada. Projekat obuhvata restauraciju starih građevina i očuvanje kulturnog nasleđa. Radovi će početi 1. novembra i trajati će tokom zime.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-10T14:00:00Z"
+    },
+    {
+      "id": "3c301e44-8c4b-4496-a7db-f2332d540d54",
+      "title": "Započela izgradnja novog kulturnog centra",
+      "description": "U Višegradu je započela izgradnja novog kulturnog centra koji će nuditi brojne kulturne i umetničke programe. Otvorenje je planirano za sredinu sledeće godine, a centar će uključivati galerije, pozorišta i multi-funkcionalne prostore.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-12T15:00:00Z"
+    },
+    {
+      "id": "f8c5ec8a-586e-4f19-b92f-284a2533e0bc",
+      "title": "Predavanje o lokalnoj flori i fauni",
+      "description": "U subotu, 25. oktobra, biće organizovano predavanje o lokalnoj flori i fauni u Višegradu. Predavanje će voditi poznati biolog i ekološki aktivista, a svi zainteresovani su pozvani da prisustvuju.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-15T16:00:00Z"
+    },
+    {
+      "id": "bbca20e4-830e-4acd-bf7c-8ccd8119947b",
+      "title": "Koncert lokalnih izvođača",
+      "description": "U petak, 30. oktobra, u Višegradu će se održati koncert lokalnih izvođača na trgu ispred glavne gradske biblioteke. Koncert počinje u 19:00 časova i ulaz je besplatan.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-17T18:00:00Z"
+    },
+    {
+      "id": "d3145daa-dcf6-4ed6-90e6-45b7a0208822",
+      "title": "Zatvaranje letnje terase u restoranu",
+      "description": "Restoran 'Drinska Oaza' zatvara svoju letnju terasu 31. oktobra. Poslednji dan će biti obeležen specijalnim popustima i muzičkim programom. Pozivamo sve ljubitelje hrane i zabave da nam se pridruže.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-20T10:00:00Z"
+    },
+    {
+      "id": "94af47cf-c845-4323-9cc7-0e1c7b0651bc",
+      "title": "Izložba umetničkih radova",
+      "description": "U galeriji 'Višegrad Art' biće otvorena izložba umetničkih radova lokalnih umetnika od 5. novembra. Izložba će trajati do kraja meseca i biće otvorena svaki dan osim ponedeljka.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-22T12:00:00Z"
+    },
+    {
+      "id": "cab21b4e-5246-46a6-8285-b18ca6d773da",
+      "title": "Tajna veza Višegrada sa istorijskim mestima",
+      "description": "Dokumentarni film o tajnim vezama Višegrada sa značajnim istorijskim mestima biće prikazan 8. novembra u bioskopu 'Višegrad Cinema'. Film istražuje duboke istorijske korene grada i njegovu povezanost sa ključnim događajima u istoriji regiona.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-25T14:30:00Z"
+    },
+    {
+      "id": "7d8b4072-6167-4f94-92fb-2382f8252f9d",
+      "title": "Piknik u parku",
+      "description": "U nedelju, 10. novembra, organizuje se piknik u parku 'Višegrad Green'. Program uključuje igre na otvorenom, uživanje u prirodi i druženje sa komšijama. Svaki posetilac može doneti svoje omiljene grickalice i pića.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-10-28T16:00:00Z"
+    },
+    {
+      "id": "8d0eb621-fdc4-4e48-a6f2-49b94cb80aca",
+      "title": "Edukativna radionica za decu",
+      "description": "U subotu, 16. novembra, biće organizovana edukativna radionica za decu u prostorijama gradske biblioteke. Radionica će obuhvatiti kreativne aktivnosti i učenje kroz igru. Pozivamo sve roditelje da dovedu svoju decu i učine ovu subotu nezaboravnom.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "createdAt": "2024-11-01T11:00:00Z"
     }
   ]
 }
