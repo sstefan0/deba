@@ -14,6 +14,7 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions,
+  CircularProgress,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -36,7 +37,7 @@ export default function MediaForm(props: any) {
     setValue,
     formState: { errors },
   } = useForm<Inputs>({
-    defaultValues: props.data?.videoUrls,
+    defaultValues: { videoUrls: props.data?.videoUrls },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -44,11 +45,19 @@ export default function MediaForm(props: any) {
     name: "videoUrls",
   });
 
-  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
+  // useEffect(() => {
+  //   props.data.videoUrls.forEach((element: any) => {
+  //     append(element.videoURL);
+  //   });
+  // }, []);
+  const [loadedImages, setLoadedImages] = useState(
+    props.data ? props.data.image : null
+  );
   const [imageOpen, setImageOpen] = useState(false); // State to control image dropdown
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(-1);
+  const [loading, setLoading] = useState(false);
   const handleDeleteImage = (imageId: string, index: number) => {
     setImageToDelete(imageId);
     setImageIndex(index);
@@ -62,56 +71,62 @@ export default function MediaForm(props: any) {
   const confirmDeleteImage = async () => {
     if (imageToDelete) {
       try {
+        setLoading(true);
         const response = await callApi.Upload.deleteImage(imageToDelete);
         setDeleteDialogOpen(false);
         setImageToDelete(null);
-        const newArray = loadedImages.splice(imageIndex, 1);
+        const newArray = loadedImages;
+        newArray.splice(imageIndex, 1);
         setLoadedImages(newArray);
         setImageIndex(-1);
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     }
   };
-  if (props.data)
-    useEffect(() => {
-      setLoadedImages(new Array(props.data.image.length).fill(false));
+  // if (props.data)
+  //   useEffect(() => {
+  //     setLoadedImages(new Array(props.data.image.length).fill(false));
 
-      if (props.data?.videoUrls) {
-        props.data.videoUrls.forEach((videoUrl: any) => append(videoUrl));
-      }
-    }, [props.data, append, setValue]);
+  //     if (props.data?.videoUrls) {
+  //       props.data.videoUrls.forEach((videoUrl: any) => append(videoUrl));
+  //     }
+  //   }, [props.data, append, setValue]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     props.submitHandler(data);
   };
 
-  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  if (props.data)
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const index = parseInt(entry.target.getAttribute("data-index")!);
-              setLoadedImages((prev) => {
-                const newLoadedImages = [...prev];
-                newLoadedImages[index] = true;
-                return newLoadedImages;
-              });
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          rootMargin: "100px",
-        }
-      );
+  // const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  // if (props.data)
+  //   useEffect(() => {
+  //     const observer = new IntersectionObserver(
+  //       (entries) => {
+  //         entries.forEach((entry) => {
+  //           if (entry.isIntersecting) {
+  //             const index = parseInt(entry.target.getAttribute("data-index")!);
+  //             setLoadedImages((prev) => {
+  //               const newLoadedImages = [...prev];
+  //               newLoadedImages[index] = true;
+  //               return newLoadedImages;
+  //             });
+  //             observer.unobserve(entry.target);
+  //           }
+  //         });
+  //       },
+  //       {
+  //         rootMargin: "100px",
+  //       }
+  //     );
 
-      imageRefs.current.forEach((img) => img && observer.observe(img));
+  //     imageRefs.current.forEach((img) => img && observer.observe(img));
 
-      return () => observer.disconnect();
-    }, [props.data.image]);
+  //     return () => observer.disconnect();
+  //   }, [props.data.image]);
+  console.log(props.data);
+  console.log(fields);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
       <Box sx={{ flexGrow: 1, width: "100%" }}>
@@ -135,7 +150,7 @@ export default function MediaForm(props: any) {
           Fotografije i video snimci
         </Typography>
 
-        {props.data && (
+        {props.data.image.length > 0 && (
           <Box sx={{ marginBottom: 2 }}>
             <Button
               variant="outlined"
@@ -163,7 +178,6 @@ export default function MediaForm(props: any) {
                             <img
                               src={img.imageURL}
                               alt={`Image ${index + 1}`}
-                              ref={(el) => (imageRefs.current[index] = el)}
                               style={{ width: "100%", height: "auto" }}
                             />
                           ) : (
@@ -172,14 +186,17 @@ export default function MediaForm(props: any) {
                                 height: "100px",
                                 backgroundColor: "#f0f0f0",
                               }}
-                              ref={(el) => (imageRefs.current[index] = el)}
                               data-index={index}
                             />
                           )}
                           <IconButton
                             onClick={() => handleDeleteImage(img.id, index)}
                             color="error"
-                            sx={{ position: "absolute", top: 0, right: 0 }}
+                            sx={{
+                              position: "absolute",
+                              top: 0,
+                              right: 0,
+                            }}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -207,39 +224,41 @@ export default function MediaForm(props: any) {
           </Grid>
 
           {/* Dynamically add YouTube video URLs */}
-          {fields.map((field, index) => (
-            <Grid container xs={12} key={field.id} alignItems="center">
-              <Grid xs={10}>
-                <TextField
-                  label={`YouTube Video URL ${index + 1}`}
-                  {...register(`videoUrls.${index}.url`, {
-                    required: true,
-                  })}
-                  fullWidth
-                  sx={{ marginBottom: 2 }}
-                  defaultValue={
-                    props.data
-                      ? props.data.videoUrls.length > index
-                        ? props.data.videoUrls[index].videoURL
+          {fields.map((field, index) => {
+            return (
+              <Grid container xs={12} key={field.id} alignItems="center">
+                <Grid xs={10}>
+                  <TextField
+                    label={`YouTube Video URL ${index + 1}`}
+                    {...register(`videoUrls.${index}.url`, {
+                      required: true,
+                    })}
+                    fullWidth
+                    sx={{ marginBottom: 2 }}
+                    defaultValue={
+                      props.data
+                        ? props.data.videoUrls.length > index
+                          ? props.data.videoUrls[index].videoURL
+                          : ""
                         : ""
-                      : ""
-                  }
-                />
-                {errors.videoUrls?.[index]?.url && (
-                  <span>This field is required</span>
-                )}
+                    }
+                  />
+                  {errors.videoUrls?.[index]?.url && (
+                    <span>This field is required</span>
+                  )}
+                </Grid>
+                <Grid xs={2} sx={{ textAlign: "center" }}>
+                  <IconButton
+                    onClick={() => remove(index)}
+                    color="error"
+                    sx={{ marginBottom: 2 }}
+                  >
+                    <RemoveCircleOutlineIcon />
+                  </IconButton>
+                </Grid>
               </Grid>
-              <Grid xs={2} sx={{ textAlign: "center" }}>
-                <IconButton
-                  onClick={() => remove(index)}
-                  color="error"
-                  sx={{ marginBottom: 2 }}
-                >
-                  <RemoveCircleOutlineIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
-          ))}
+            );
+          })}
 
           {/* Add Another Video Button */}
           <Grid xs={12}>
@@ -288,7 +307,20 @@ export default function MediaForm(props: any) {
             Otkaži
           </Button>
           <Button onClick={confirmDeleteImage} color="error" autoFocus>
-            Obriši
+            {loading ? (
+              <CircularProgress
+                size={24}
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            ) : (
+              "Obriši"
+            )}
           </Button>
         </DialogActions>
       </Dialog>

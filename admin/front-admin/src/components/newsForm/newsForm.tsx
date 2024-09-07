@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Collapse,
   Dialog,
   DialogActions,
@@ -45,6 +46,7 @@ const NewsForm = (props: any) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(-1);
+  const [loading, setLoading] = useState(false);
   const handleDeleteImage = (imageId: string, index: number) => {
     setImageToDelete(imageId);
     setImageIndex(index);
@@ -54,14 +56,19 @@ const NewsForm = (props: any) => {
   const confirmDeleteImage = async () => {
     if (imageToDelete) {
       try {
+        setLoading(true);
         const response = await callApi.Upload.deleteImage(imageToDelete);
         setDeleteDialogOpen(false);
         setImageToDelete(null);
-        const newArray = loadedImages.splice(imageIndex, 1);
+        const newArray = loadedImages;
+        newArray.splice(imageIndex, 1);
+        console.log(newArray);
         setLoadedImages(newArray);
         setImageIndex(-1);
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     }
   };
@@ -216,7 +223,22 @@ const NewsForm = (props: any) => {
             Otkaži
           </Button>
           <Button onClick={confirmDeleteImage} color="error" autoFocus>
-            Obriši
+            <Button onClick={confirmDeleteImage} color="error" autoFocus>
+              {loading ? (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              ) : (
+                "Obriši"
+              )}
+            </Button>
           </Button>
         </DialogActions>
       </Dialog>

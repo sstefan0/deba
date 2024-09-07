@@ -28,7 +28,7 @@ function LeafletMap(props: any) {
         />
         <Marker position={[props.lat, props.lon]}></Marker>
         {props.coordinates.length > 0 && (
-          <Polyline positions={koordinatePrave} color="blue"></Polyline>
+          <Polyline positions={koordinatePrave} color={props.color}></Polyline>
         )}
       </MapContainer>
     </Paper>

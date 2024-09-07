@@ -27,25 +27,25 @@
     {
       "id": "468a557a-ef4e-4729-bb4b-37cbe107004e",
       "name": "Kulturno-istorijska znamenitost",
-      "color": "#B8860B",
+      "color": "#B71C1C",
       "iconURL": "historica-pin.png"
     },
     {
       "id": "033af66b-dec3-4475-adcb-e846947ea230",
       "name": "Restoran",
-      "color": "#FF4500",
+      "color": "#FF9800",
       "iconURL": "restaurant.png"
     },
     {
       "id": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
       "name": "Biciklistička staza",
-      "color": "#FF6347",
+      "color": "#2196F3",
       "iconURL": "bicycle.png"
     },
     {
       "id": "3cc0f693-de40-4362-911c-9a4e675b1cce",
       "name": "Planinarska staza",
-      "color": "#2E8B57",
+      "color": "#2E7D32",
       "iconURL": "mountain.png"
     }
   ],

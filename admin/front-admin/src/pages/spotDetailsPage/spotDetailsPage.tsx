@@ -99,31 +99,34 @@ const SpotDetailsPage = () => {
               <ImagesList images={loaderData.Image} />
             </Paper>
           </Grid>
-          <Grid xs={12}>
-            <Paper
-              square={false}
-              elevation={1}
-              sx={{ padding: "1rem", borderRadius: "25px" }}
-            >
-              <Typography variant="h4" align="left" mb={"10px"}>
-                Video snimci
-              </Typography>
-              <Carousel
-                showStatus={false}
-                infiniteLoop={true}
-                showThumbs={false}
+          {loaderData.VideoMaterials.length > 0 && (
+            <Grid xs={12}>
+              <Paper
+                square={false}
+                elevation={1}
+                sx={{ padding: "1rem", borderRadius: "25px" }}
               >
-                {loaderData.VideoMaterials.map((video: any) => {
-                  const videoId = (video.videoURL as string).split("?v=")[1];
-                  return <YouTube key={video.id} videoId={videoId}></YouTube>;
-                })}
-              </Carousel>
-            </Paper>
-          </Grid>
+                <Typography variant="h4" align="left" mb={"10px"}>
+                  Video snimci
+                </Typography>
+                <Carousel
+                  showStatus={false}
+                  infiniteLoop={true}
+                  showThumbs={false}
+                >
+                  {loaderData.VideoMaterials.map((video: any) => {
+                    const videoId = (video.videoURL as string).split("?v=")[1];
+                    return <YouTube key={video.id} videoId={videoId}></YouTube>;
+                  })}
+                </Carousel>
+              </Paper>
+            </Grid>
+          )}
           <Grid xs={12}>
             <MapChart
               lat={loaderData.lat}
               lon={loaderData.lon}
+              color={loaderData.type.color}
               coordinates={loaderData.GeoCoordinates}
             />
           </Grid>

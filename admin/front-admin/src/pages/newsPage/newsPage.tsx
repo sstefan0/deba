@@ -20,7 +20,7 @@ const NewsPage = () => {
   const [stats, setStats] = useState<any>({});
   const handleChange = (e: ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    navigate(`/novosti/${value}`);
+    navigate(`/dashboard/novosti/${value}`);
   };
   useEffect(() => {
     if (!user) navigate("/login");
