@@ -6,7 +6,9 @@ import {
   deleteCoordinatesController,
   deleteSpotController,
   getAllSpotsController,
+  getByTypeController,
   getCountsController,
+  getRecommendationsController,
   getSpotByIdController,
   getSpotsTableController,
   getSpotTypesController,
@@ -56,6 +58,8 @@ router.get(
   authorize([Role.ADMIN, Role.USER]),
   getCountsController
 );
+router.get("/getByType", getByTypeController);
+router.get("/getRecommendations", getRecommendationsController);
 
 router.put(
   "/update",

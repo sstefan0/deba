@@ -64,7 +64,7 @@ const AccountsPage = () => {
           <Grid xs={12} container justifyContent={"center"}></Grid>
         </Grid>
       </Box>
-      <Link to={"/register"}>
+      <Link to={"register"}>
         <Fab
           variant="extended"
           sx={{ position: "fixed", bottom: "3%", right: "1%" }}

@@ -29,6 +29,8 @@ import ForgotPasswordPage from "./pages/forgotPasswordPage/forgotPasswordPage.ts
 import ResetPasswordPage from "./pages/resetPasswordPage/resetPasswordPage.tsx";
 import PresentationPage from "./pages/presentationPage/presentationPage.tsx";
 import NewsPublicPage from "./pages/newsPublicPage/newsPublicPage.tsx";
+import LandingPage from "./pages/landingPage/landingPage.tsx";
+import PublicAppBar from "./components/publicAppBar/publicAppBar.tsx";
 let theme = createTheme({
   palette: {
     mode: "dark",
@@ -38,25 +40,25 @@ theme = responsiveFontSizes(theme);
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/dashboard",
     element: <App />,
     children: [
       {
         // Redirect the root path to "/turistickaMjesta"
         index: true, // This matches the root path "/"
-        element: <Navigate to="/turistickaMjesta" replace />,
+        element: <Navigate to="turistickaMjesta" replace />,
       },
       {
-        path: "/turistickaMjesta",
+        path: "turistickaMjesta",
         element: <TouristSpotsPage />,
         loader: touristSpotsLoader,
       },
       {
-        path: "/createSpot",
+        path: "createSpot",
         element: <AddSpotPage></AddSpotPage>,
       },
       {
-        path: "/editSpot/:id",
+        path: "editSpot/:id",
         element: <EditSpotPage></EditSpotPage>,
         loader: async ({ params }) => {
           const response = await callApi.TouristSpots.getById(params.id!);
@@ -64,7 +66,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/novosti/:p",
+        path: "novosti/:p",
         element: <NewsPage />,
         loader: async ({ params }) => {
           try {
@@ -79,9 +81,9 @@ const router = createBrowserRouter([
           }
         },
       },
-      { path: "/dodajNovost", element: <AddNewsPage /> },
+      { path: "dodajNovost", element: <AddNewsPage /> },
       {
-        path: "/urediNovost/:id",
+        path: "urediNovost/:id",
         element: <EditNewsPage />,
         loader: async ({ params }) => {
           try {
@@ -93,7 +95,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/korisnickiNalozi",
+        path: "korisnickiNalozi",
         element: <AccountsPage />,
         loader: async () => {
           try {
@@ -105,7 +107,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/urediNalog/:id",
+        path: "urediNalog/:id",
         element: <EditUserPage />,
         loader: async ({ params }) => {
           try {
@@ -116,59 +118,84 @@ const router = createBrowserRouter([
           }
         },
       },
-      { path: "/register", element: <RegisterPage /> },
+      { path: "register", element: <RegisterPage /> },
     ],
   },
   { path: "/login", element: <Login /> },
-  {
-    path: "/novost/:id",
-    element: <ArticlePage />,
-    loader: async ({ params }) => {
-      try {
-        const response = await callApi.News.getById(params.id!);
-        return response;
-      } catch (error) {
-        return null;
-      }
-    },
-  },
   { path: "/forgotPassword", element: <ForgotPasswordPage /> },
   { path: "/resetPassword/:token", element: <ResetPasswordPage /> },
+
   {
-    path: "/view/:id",
-    element: <SpotDetailsPage />,
-    loader: async ({ params }) => {
-      const response = await callApi.TouristSpots.getById(params.id!);
-      return response;
-    },
+    path: "/home",
+    element: <LandingPage />,
   },
   {
-    path: "/public",
-    element: <PresentationPage />,
+    path: "/",
+    element: <PublicAppBar />,
     loader: async () => {
       try {
-        const response = await callApi.TouristSpots.getAllPublic();
-        return response;
-      } catch (error) {
-        return null;
-      }
-    },
-  },
-  {
-    path: "/sveNovosti/:p",
-    element: <NewsPublicPage />,
-    loader: async ({ params }) => {
-      try {
-        const response = await callApi.News.getNews(
-          params.p! as unknown as number,
-          10
-        );
+        const response = await callApi.TouristSpots.getByType();
         return response;
       } catch (error) {
         console.error(error);
         return null;
       }
     },
+    children: [
+      {
+        // Redirect the root path to "/turistickaMjesta"
+        index: true, // This matches the root path "/"
+        element: <Navigate to="home" replace />,
+      },
+      {
+        path: "map",
+        element: <PresentationPage />,
+        loader: async () => {
+          try {
+            const response = await callApi.TouristSpots.getAllPublic();
+            return response;
+          } catch (error) {
+            return null;
+          }
+        },
+      },
+      {
+        path: "/view/:id",
+        element: <SpotDetailsPage />,
+        loader: async ({ params }) => {
+          const response = await callApi.TouristSpots.getById(params.id!);
+          return response;
+        },
+      },
+      {
+        path: "/novost/:id",
+        element: <ArticlePage />,
+        loader: async ({ params }) => {
+          try {
+            const response = await callApi.News.getById(params.id!);
+            return response;
+          } catch (error) {
+            return null;
+          }
+        },
+      },
+      {
+        path: "/sveNovosti/:p",
+        element: <NewsPublicPage />,
+        loader: async ({ params }) => {
+          try {
+            const response = await callApi.News.getNews(
+              params.p! as unknown as number,
+              10
+            );
+            return response;
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        },
+      },
+    ],
   },
 ]);
 

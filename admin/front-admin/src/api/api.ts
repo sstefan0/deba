@@ -56,6 +56,8 @@ const TouristSpots = {
     requests.deleteOne(`/touristSpot/delete?id=${spotId}`),
   getAllPublic: () => requests.get("/touristSpot/getAll"),
   getCounts: () => requests.get("/touristSpot/getCounts"),
+  getByType: () => requests.get("touristSpot/getByType"),
+  getRecommendations: () => requests.get("/touristSpot/getRecommendations"),
 };
 
 const News = {

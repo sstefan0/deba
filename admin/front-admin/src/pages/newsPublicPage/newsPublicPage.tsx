@@ -14,23 +14,35 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { useLoaderData } from "react-router-dom";
 import callApi from "../../api/api";
 import { Link } from "react-router-dom";
+import Grid from "@mui/material/Unstable_Grid2";
+import MainArticle from "../../components/mainArticle/mainArticle";
+import NewsArticleCard from "../../components/newsArticle/newsArticle";
+import NewsCard from "../../components/newsCard/newsCard";
 
 const NewsPublicPage = () => {
   const news: any = useLoaderData();
   const [displayData, setDisplayData] = useState(news);
   const [page, setPage] = useState(1);
+  const [end, setEnd] = useState(10);
   const [endReached, setEndReached] = useState(false);
+  console.log(displayData);
 
   const handleClick = async () => {
     try {
-      const nextPage = await callApi.News.getNews(page + 1, 10);
-      if (nextPage.length === 0) {
-        setEndReached(true);
-      } else {
-        const updatedNews = [...displayData, ...nextPage];
-        setDisplayData(updatedNews);
-        setPage(page + 1);
+      let nextPage;
+      if (end + 3 >= displayData.length) {
+        nextPage = await callApi.News.getNews(page + 1, 10);
+        if (nextPage.length === 0) {
+          setEndReached(true);
+        } else {
+          const updatedNews = [...displayData, ...nextPage];
+          setDisplayData(updatedNews);
+          setPage(page + 1);
+        }
       }
+      if (end + 3 >= nextPage.length + displayData.length)
+        setEnd(displayData.length + nextPage.length);
+      else setEnd(end + 3);
     } catch (error) {
       console.error(error);
     }
@@ -38,67 +50,60 @@ const NewsPublicPage = () => {
 
   return (
     <Container
-      maxWidth="lg"
-      sx={{ padding: "20px", bgcolor: "#121212", color: "#fff" }}
+      maxWidth="xl"
+      sx={{ padding: "50px", bgcolor: "#121212", color: "#fff" }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-        <NewspaperIcon sx={{ mr: 1, fontSize: "2rem" }} />
-        <Typography variant="h5" component="h1">
-          Novosti
-        </Typography>
-      </Box>
-      <List>
-        {displayData.map((article: any) => (
-          <React.Fragment key={article.id}>
-            <Link
-              to={`/novost/${article.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <ListItem
-                alignItems="flex-start"
-                sx={{ height: 100, "&:hover": { backgroundColor: "#333" } }}
-              >
-                <ListItemText
-                  primary={
-                    <>
-                      <Typography variant="h6" component="span" color="grey">
-                        {article.title}
-                      </Typography>
-                    </>
-                  }
-                  secondary={
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        color: "text.secondary",
-                      }}
-                    >
-                      <CalendarMonthIcon sx={{ fontSize: "1rem", mr: 0.5 }} />
-                      <Typography
-                        component="span"
-                        variant="caption"
-                        color="textSecondary"
-                      >
-                        {new Date(article.createdAt).toLocaleDateString()}
-                      </Typography>
-                    </Box>
-                  }
-                />
-              </ListItem>
-            </Link>
-            <Divider variant="fullWidth" sx={{ bgcolor: "#444", height: 2 }} />
-          </React.Fragment>
-        ))}
-      </List>
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{ mt: 3 }}
-        onClick={handleClick}
-        disabled={endReached}
+      <Grid container alignItems="stretch" spacing={3}>
+        <Grid xs={12} md={8}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: "5px",
+              width: "100%",
+              height: "100%", // Make sure this div fills the grid cell
+            }}
+          >
+            <MainArticle article={news[0]} />
+          </div>
+        </Grid>
+        <Grid xs={12} md={4}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: "5px",
+              width: "100%",
+              height: "100%", // Make sure this div fills the grid cell
+            }}
+          >
+            {news.slice(1, 6).map((article: any) => (
+              <NewsArticleCard article={article} key={article.id} />
+            ))}
+          </div>
+        </Grid>
+      </Grid>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        Pogledaj više
+        <Typography variant="h4" textAlign={"left"} padding={"3rem 0 1rem 0"}>
+          Ostale novosti
+        </Typography>
+        <Grid container spacing={3} width={"100%"}>
+          {displayData.slice(7, end).map((article: any) => (
+            <Grid sm={12} md={4}>
+              <NewsCard article={article} />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+      <Button disabled={endReached} onClick={handleClick}>
+        Prikaži više
       </Button>
     </Container>
   );

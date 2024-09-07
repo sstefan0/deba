@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 function LeafletMap(props: any) {
   const koordinatePrave = props.coordinates.map((coordinates: any) => ({
@@ -8,7 +8,14 @@ function LeafletMap(props: any) {
   }));
 
   return (
-    <Paper square={false} elevation={1} sx={{ padding: "5px" }}>
+    <Paper
+      square={false}
+      elevation={1}
+      sx={{ padding: "1rem", borderRadius: "25px" }}
+    >
+      <Typography variant="h4" textAlign={"left"} mb={"10px"}>
+        Lokacija
+      </Typography>
       <MapContainer
         center={[props.lat, props.lon]}
         zoom={15}

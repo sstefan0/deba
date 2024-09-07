@@ -60,7 +60,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const user = getAuth();
   useEffect(() => {
-    if (user) navigate("/turistickaMjesta");
+    if (user) navigate("/dashboard/turistickaMjesta");
   }, [user]);
 
   const handleSubmit = async (event: any) => {
@@ -78,7 +78,7 @@ const Login = () => {
         dispatch(login({ accessToken }));
       }
 
-      navigate("/turistickaMjesta");
+      navigate("/dashboard/turistickaMjesta");
     } catch (e) {
       setError("Pogrešan email ili lozinka");
     }

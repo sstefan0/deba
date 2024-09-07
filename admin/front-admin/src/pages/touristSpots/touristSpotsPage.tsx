@@ -45,7 +45,7 @@ const TouristSpotsPage = () => {
           <CustomizedTables data={tableData} />
         </Grid>
       </Grid>
-      <Link to={"/createSpot"}>
+      <Link to={"../createSpot"}>
         <Fab
           variant="extended"
           sx={{ position: "fixed", bottom: "3%", right: "1%" }}

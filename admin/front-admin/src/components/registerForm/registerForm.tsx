@@ -2,6 +2,8 @@ import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 type Inputs = {
   firstName: string;
@@ -19,6 +21,8 @@ const RegisterForm = (props: any) => {
   } = useForm<Inputs>({ defaultValues: { ...props.data, password: "" } });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => props.submitHandler(data);
+
+  const userRole = useSelector((state: RootState) => state.user.role);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
@@ -69,7 +73,7 @@ const RegisterForm = (props: any) => {
                 label="Tip"
                 select
                 fullWidth
-                disabled={props.data && props.data.role === "USER"}
+                disabled={props.data && userRole === "USER"}
                 defaultValue={props.data ? props.data.role : ""}
                 {...register("role", {})}
               >

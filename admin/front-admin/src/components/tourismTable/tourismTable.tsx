@@ -122,7 +122,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
               <StyledTableCell
                 align="right"
                 onClick={() => {
-                  navigate("/editSpot/" + row.id);
+                  navigate("/dashboard/editSpot/" + row.id);
                 }}
               >
                 <EditIcon />
@@ -182,7 +182,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
   ) : (
     <div>
       <h2>Nema turističkih destinacija za prikaz.</h2>
-      <a href="http://localhost:5173/createSpot">
+      <a href="http://localhost:5173/dashboard/createSpot">
         Kliknite ovdje da dodate turističku destinaciju.
       </a>
     </div>

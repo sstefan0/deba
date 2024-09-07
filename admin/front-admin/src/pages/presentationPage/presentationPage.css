@@ -1,0 +1,19 @@
+.custom-popup .leaflet-popup-content-wrapper {
+  background: #333;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: #333;
+}
+
+.categories-div {
+  width: 35%; /* Default width for larger screens */
+}
+
+@media (max-width: 600px) {
+  .categories-div {
+    width: 100%; /* Full width on mobile screens */
+  }
+}

@@ -60,7 +60,7 @@ const ResetPasswordPage = () => {
   const { token } = useParams();
   const user = getAuth();
   useEffect(() => {
-    if (user) navigate("/turistickaMjesta");
+    if (user) navigate("/dashboard/turistickaMjesta");
   }, [user]);
 
   const handleSubmit = async (event: any) => {

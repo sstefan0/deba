@@ -65,17 +65,17 @@
       "description": "Andrićgrad, also known as Kamengrad, is a town dedicated to the Nobel Prize-winning author Ivo Andrić, located near the famous Mehmed Paša Sokolović Bridge. The town was built by renowned filmmaker Emir Kusturica and opened in 2014. The architectural style of Andrićgrad is a mix of different historical periods and styles that have marked the history of Višegrad, from the Ottoman Empire to the Austro-Hungarian period. The town features cobblestone streets, a church, a theatre, a multiplex cinema, a hotel, and a gallery, among other attractions. Visitors can explore the rich cultural heritage of the region and learn more about Andrić's life and work.",
       "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
       "potentialTypeId": "468a557a-ef4e-4729-bb4b-37cbe107004e",
-      "lat": 43.780003,
-      "lon": 19.283301
+      "lat": 43.78539999085525,
+      "lon": 19.29384360945891
     },
     {
       "id": "4c0a43b3-f4e3-47d2-a8f7-d1f3b89a3c74",
-      "name": "Višegrad Spa (Višegradska Banja)",
-      "description": "Višegrad Spa, also known as Višegradska Banja, is a popular health resort located near the town of Višegrad. The spa is renowned for its therapeutic waters, which have been used for centuries to treat various ailments, including rheumatism and skin conditions. The thermal waters are rich in minerals and have a temperature of around 34°C. The spa offers a range of treatments, including hydrotherapy, massages, and wellness programs. Surrounded by lush nature, the spa provides a serene environment for relaxation and rejuvenation.",
+      "name": "Restoran Anika",
+      "description": "U predivnom ambijentu doline rijeke Drine nalazi se poznati ugostiteljski objekat “Kafana Anika”. Na putu Sarajevo – Užice, udaljen od “Ćuprije na Drini” svega 400 metara. Besplatan privatni parking za goste restorana (za automobile i turističke autobuse). Ono na šta smo posebno ponosni jeste naš vlastiti brend „Višegradski ćevap“, koji možete probati samo u naša dva objekta u Višegradu.",
       "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
       "potentialTypeId": "033af66b-dec3-4475-adcb-e846947ea230",
-      "lat": 43.7888,
-      "lon": 19.2967
+      "lat": 43.78380864873618,
+      "lon": 19.29161239523029
     },
     {
       "id": "3e8ba855-a2f4-489b-90ce-cd808b0a0786",
@@ -94,6 +94,15 @@
       "potentialTypeId": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
       "lat": 43.782,
       "lon": 19.29
+    },
+    {
+      "id": "88ba05dc-aed5-414f-97dd-2b425f2e847c",
+      "name": "Višegradska Banja",
+      "description": "Višegradska Banja nalazi se 5 km sjeverno od Višegrada. Smještena je u gustoj borovoj šumi na nadmorskoj visini od 414 m. Zbog svoje nadmorske visine i prirodnog okruženja ima i karakteristike vazdušne banje. Termalne vode Višegradske Banje imaju karakteristike radioaktivne karbonatne homeoterme, temperature 34ºc. Osnovna ljekovita svojstva potiču od njene radioaktivnosti , čiji je nosilac radon i njegovi produkti raspadanja. Po radioaktivnosti Višegradska Banja je na prvom mjestu u Bosni i Hercegovini , a na drugom mjestu u bivšoj Jugoslaviji. Stepen radijacije je terapijski optimalan, bez mogućnosti kumulacije i eventualnih neželjenih efekata. Radon smanjuje bol, podiže opštu otpornost organizma, povoljno djeluje na neke endokrine žlijezde, respiratorne i alergijske bolesti. Vode Višegradske Banje koriste se za prevenciju i liječenje svih starosnih grupa.",
+      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "potentialTypeId": "bb5d4511-b1f6-4e81-b1d7-1702f18843f3",
+      "lat": 43.82074017883376,
+      "lon": 19.30942355203892
     }
   ],
   "image": [
@@ -108,14 +117,34 @@
       "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
     },
     {
-      "id": "acc7f06d-5745-4788-8020-33ab093d5ccb",
-      "imageURL": "https://drive.google.com/thumbnail?id=19qBVtbJqQYIeY6asUtAxtC6UXHLFxyu7&sz=w1000",
-      "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
-    },
-    {
       "id": "ae08e2f8-967b-452f-91d5-9a3e5c7a0754",
       "imageURL": "https://drive.google.com/thumbnail?id=1dWaBBblJobjRzv7io78QSSrhrbKV3pkX&sz=w1000",
       "tourismPotentialId": "3a97937e-c388-4357-b8b4-c33725c584a5"
+    },
+    {
+      "id": "f1f8a9f1-8f56-467c-9410-2183b477f9bd",
+      "imageURL": "https://drive.google.com/thumbnail?id=1Mn_xZr00T7Ba4mYHUg42sseewQfRRcvP&sz=w1000",
+      "tourismPotentialId": "9b1f7d6b-5bda-4f2b-96a2-5f7b5dd2a771"
+    },
+    {
+      "id": "4ddf6020-5f3d-47d1-b33f-1bbace644769",
+      "imageURL": "https://drive.google.com/thumbnail?id=1mURpBypSp4I9DBEZsDmP6Txa4ZV0_3FU&sz=w1000",
+      "tourismPotentialId": "4c0a43b3-f4e3-47d2-a8f7-d1f3b89a3c74"
+    },
+    {
+      "id": "c395e027-c31d-4e95-b9fe-99cb964c69be",
+      "imageURL": "https://drive.google.com/thumbnail?id=1O3GHNLyUc32-ipQeLU21F9dJ-Wtfp3uE&sz=w1000",
+      "tourismPotentialId": "3e8ba855-a2f4-489b-90ce-cd808b0a0786"
+    },
+    {
+      "id": "067b5b61-37c7-4a50-82a3-2e471ded22b7",
+      "imageURL": "https://drive.google.com/thumbnail?id=1gXYLzFNRGbhWSfYfHrlz58ADs7ArqZ7Y&sz=w1000",
+      "tourismPotentialId": "ee4d66f6-c2ad-42a3-9712-499a5987c423"
+    },
+    {
+      "id": "8d637e58-8bcd-4613-9c9c-86f6fb82e220",
+      "imageURL": "https://drive.google.com/thumbnail?id=1mTPMpkvnqM8nCTMLQsnn81H37BLNTJVB&sz=w1000",
+      "tourismPotentialId": "88ba05dc-aed5-414f-97dd-2b425f2e847c"
     }
   ],
   "videos": [

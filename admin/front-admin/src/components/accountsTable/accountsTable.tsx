@@ -85,7 +85,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
               <StyledTableCell
                 align="right"
                 onClick={() => {
-                  navigate("/uredinalog/" + row.id);
+                  navigate("/dashboard/uredinalog/" + row.id);
                 }}
               >
                 <EditIcon />

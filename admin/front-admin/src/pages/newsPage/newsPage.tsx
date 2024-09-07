@@ -79,7 +79,7 @@ const NewsPage = () => {
           </Grid>
         </Grid>
       </Box>
-      <Link to={"/dodajNovost"}>
+      <Link to={"../dodajNovost"}>
         <Fab
           variant="extended"
           sx={{ position: "fixed", bottom: "3%", right: "1%" }}

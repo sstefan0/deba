@@ -138,7 +138,7 @@ const AddSpotPage = () => {
     }
   };
   const handleContinue = () => {
-    navigate("/turistickaMjesta");
+    navigate("/dashboard/turistickaMjesta");
   };
   const isStepCompleted = (stepIndex: number) => data[stepIndex] != null;
 

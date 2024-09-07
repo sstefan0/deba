@@ -130,7 +130,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
               <StyledTableCell
                 align="right"
                 onClick={() => {
-                  navigate("/urediNovost/" + row.id);
+                  navigate("/dashboard/urediNovost/" + row.id);
                 }}
               >
                 <EditIcon />
@@ -174,7 +174,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
   ) : (
     <div>
       <h2>Nema kreiranih novosti za prikaz.</h2>
-      <a href="http://localhost:5173/dodajNovost">
+      <a href="http://localhost:5173/dashboard/dodajNovost">
         Kreirajte vašu prvu novost.
       </a>
     </div>

@@ -8,6 +8,7 @@ import {
 } from "../dto/tourist-spot-dto";
 import { Request, Response, NextFunction } from "express";
 import HttpException from "../util/http-exception";
+import { PrismaPromise } from "@prisma/client";
 
 export const addTouristSpotController = async (
   req: Request,
@@ -99,7 +100,10 @@ export const getAllSpotsController = async (
 ) => {
   try {
     const touristSpots = await prisma.tourismPotential.findMany({
-      include: { type: { select: { name: true, color: true } } },
+      include: {
+        type: { select: { name: true, color: true } },
+        Image: { select: { imageURL: true }, take: 1 },
+      },
     });
 
     const formattedResponse = touristSpots.map((spot) => ({
@@ -107,6 +111,8 @@ export const getAllSpotsController = async (
       name: spot.name,
       type: spot.type.name,
       color: spot.type.color,
+      image: spot.Image[0].imageURL,
+      description: spot.description,
       lat: spot.lat,
       lon: spot.lon,
     }));
@@ -282,6 +288,58 @@ export const getCountsController = async (
     };
 
     res.status(200).json(response);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getByTypeController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const spots = await prisma.tourismPotential.findMany({
+      include: { type: { select: { name: true, color: true } } },
+    });
+    const groupedInstances = spots.reduce((acc, instance) => {
+      if (!acc[instance.type.name]) {
+        acc[instance.type.name] = [];
+      }
+      acc[instance.type.name].push(instance);
+      return acc;
+    }, {} as { [key: string]: typeof spots });
+
+    res.status(200).json(groupedInstances);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const getRecommendationsController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const types = await prisma.potentialType.findMany();
+    const promises: PrismaPromise<any>[] = [];
+    types.forEach((type) => {
+      promises.push(
+        prisma.tourismPotential.findFirst({
+          where: { potentialTypeId: type.id },
+          include: { Image: { select: { imageURL: true }, take: 1 } },
+        })
+      );
+    });
+    const response = await Promise.all(promises);
+    const formattedResponse = response.reduce((obj, value, index) => {
+      obj[types[index].name] = value;
+      return obj;
+    }, {});
+    console.log(promises);
+    console.log(response);
+    res.status(200).json(formattedResponse);
   } catch (e) {
     next(e);
   }

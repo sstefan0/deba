@@ -45,7 +45,11 @@ const EditUserPage = () => {
   };
 
   const handleContinue = () => {
-    navigate(user === "ADMIN" ? "/korisnickiNalozi" : "/turistickaMjesta");
+    navigate(
+      user === "ADMIN"
+        ? "/dashboard/korisnickiNalozi"
+        : "/dashboard/turistickaMjesta"
+    );
   };
 
   return (

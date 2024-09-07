@@ -27,7 +27,7 @@ const EditSpotPage = () => {
     if (!user) navigate("/login");
   }, [user]);
   const handleContinue = () => {
-    navigate("/turistickaMjesta");
+    navigate("/dashboard/turistickaMjesta");
   };
   const spotFormRef = useRef<HTMLDivElement>(null);
   const routeFormRef = useRef<HTMLDivElement>(null);

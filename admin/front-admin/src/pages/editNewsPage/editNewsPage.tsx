@@ -51,7 +51,7 @@ const EditNewsPage = () => {
     }
   };
   const handleContinue = () => {
-    navigate("/novosti/1");
+    navigate("/dashboard/novosti/1");
   };
 
   return (

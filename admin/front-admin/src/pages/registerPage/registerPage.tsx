@@ -30,7 +30,7 @@ const RegisterPage = () => {
   };
 
   const handleContinue = () => {
-    navigate("/korisnickiNalozi");
+    navigate("/dashboard/korisnickiNalozi");
   };
 
   return (

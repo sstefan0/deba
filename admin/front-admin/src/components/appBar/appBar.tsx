@@ -74,7 +74,7 @@ export default function ResponsiveDrawer() {
           <ListItem key={"Turisticka mjesta"} disablePadding>
             <ListItemButton
               component={Link}
-              to="/turistickaMjesta" // Add the path you want to navigate to
+              to="turistickaMjesta" // Add the path you want to navigate to
               onClick={() => {
                 setPageTitle("Turistička mjesta");
               }}
@@ -88,7 +88,7 @@ export default function ResponsiveDrawer() {
           <ListItem key={"Novosti"} disablePadding>
             <ListItemButton
               component={Link}
-              to="/novosti/1" // Add the path you want to navigate to
+              to="novosti/1" // Add the path you want to navigate to
               onClick={() => {
                 setPageTitle("Novosti");
               }}
@@ -103,7 +103,7 @@ export default function ResponsiveDrawer() {
             <ListItem key={"Korisnički nalozi"} disablePadding>
               <ListItemButton
                 component={Link}
-                to="/korisnickiNalozi" // Add the path you want to navigate to
+                to="korisnickiNalozi" // Add the path you want to navigate to
                 onClick={() => {
                   setPageTitle("Korisnički nalozi");
                 }}
