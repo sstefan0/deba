@@ -57,7 +57,9 @@ export default function RouteForm(props: any) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-      <Box sx={{ flexGrow: 1, width: "100%" }}>
+      <Box
+        sx={{ flexGrow: 1, width: "100%", padding: "1rem", cursor: "default" }}
+      >
         <Typography
           variant="h4"
           textAlign={"left"}
@@ -77,14 +79,13 @@ export default function RouteForm(props: any) {
           </span>
           Ucrtavanje rute
         </Typography>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} padding={"1rem"}>
           <Grid container xs={12}>
             <Grid xs={12}>
               <TextField
                 sx={{ display: "none" }}
                 {...register("location", { required: true })}
               />
-              <Typography>Ozanačite lokaciju</Typography>
               <Paper square={false} elevation={1} sx={{ width: "100%" }}>
                 <MapContainer
                   center={[43.782416968212864, 19.288123754582692]}
@@ -126,7 +127,7 @@ export default function RouteForm(props: any) {
                 onClick={undoLastPoint} // Call the undo last point function
                 disabled={positions.length === 0} // Disable if there are no points
               >
-                Poništi prethodnu tacku
+                Poništi prethodnu tačku
               </Button>
             </Grid>
           </Grid>

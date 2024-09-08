@@ -26,7 +26,7 @@ const RegisterForm = (props: any) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-      <Box sx={{ flexGrow: 1, width: "100%" }}>
+      <Box sx={{ flexGrow: 1, width: "100%", padding: "1rem" }}>
         <Typography
           variant="h4"
           textAlign={"left"}
@@ -34,7 +34,7 @@ const RegisterForm = (props: any) => {
         >
           {props.data ? "Uređivanje naloga" : "Kreiranje naloga"}
         </Typography>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} padding={"1rem"}>
           <Grid xs={12} container spacing={3}>
             <Grid xs={12} md={6}>
               <TextField

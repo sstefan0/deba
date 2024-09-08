@@ -131,11 +131,16 @@ const PresentationPage = () => {
             {types.map((type: any) => (
               <Button
                 key={type.id}
-                variant="text"
+                variant="outlined"
                 sx={{
                   color: type.color,
+                  background: "rgba(0,0,0,0.25)",
+                  mb: "5px",
                   fontWeight: "bold",
+                  borderRadius: "25px",
+                  border: "none",
                   "&:focus": { outline: "none !important" },
+                  "&:hover": { outline: "none", border: "none" },
                 }}
                 onClick={() => {
                   setSelectedType(type.name), console.log("centaaar");
@@ -154,6 +159,7 @@ const PresentationPage = () => {
         ) : (
           !isMobile && (
             <>
+              <Typography variant="h5">Preporuka</Typography>
               <img
                 src={recommendations[selectedType].Image[0].imageURL}
                 style={{
@@ -163,7 +169,6 @@ const PresentationPage = () => {
                   border: "1px solid white",
                 }}
               ></img>
-              <Typography variant="h5">Preporuka</Typography>
               <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
                 {recommendations[selectedType].name}
               </Typography>

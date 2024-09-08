@@ -77,6 +77,7 @@ export default function ResponsiveDrawer() {
               to="turistickaMjesta" // Add the path you want to navigate to
               onClick={() => {
                 setPageTitle("Turistička mjesta");
+                handleDrawerClose();
               }}
             >
               <ListItemIcon>
@@ -91,6 +92,7 @@ export default function ResponsiveDrawer() {
               to="novosti/1" // Add the path you want to navigate to
               onClick={() => {
                 setPageTitle("Novosti");
+                handleDrawerClose();
               }}
             >
               <ListItemIcon>
@@ -106,6 +108,7 @@ export default function ResponsiveDrawer() {
                 to="korisnickiNalozi" // Add the path you want to navigate to
                 onClick={() => {
                   setPageTitle("Korisnički nalozi");
+                  handleDrawerClose();
                 }}
               >
                 <ListItemIcon>
@@ -137,7 +140,7 @@ export default function ResponsiveDrawer() {
               {userRole === "ADMIN" ? "Administrator" : "Korisnik"}
             </Typography>
           </div>
-          <ProfileMenu userId={userId} />
+          <ProfileMenu userId={userId} closeHandler={handleDrawerClose} />
           {/* <Button variant="text">
             <SettingsIcon />
           </Button> */}

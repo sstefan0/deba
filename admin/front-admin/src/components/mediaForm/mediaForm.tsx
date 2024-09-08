@@ -129,7 +129,7 @@ export default function MediaForm(props: any) {
   console.log(fields);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-      <Box sx={{ flexGrow: 1, width: "100%" }}>
+      <Box sx={{ flexGrow: 1, width: "100%", padding: "1rem" }}>
         <Typography
           variant="h4"
           textAlign={"left"}

@@ -21,11 +21,10 @@ async function main() {
   await prisma.user.createMany({ data: users });
   await prisma.potentialType.createMany({ data: seedData.potentialType });
   await prisma.tourismPotential.createMany({ data: seedData.touristSpot });
+  await prisma.newsArticle.createMany({ data: seedData.news });
   await prisma.image.createMany({ data: seedData.image });
   await prisma.videoMaterials.createMany({ data: seedData.videos });
-  await prisma.document.createMany({ data: seedData.documents });
   await prisma.geoCoordinates.createMany({ data: seedData.coordinates });
-  await prisma.newsArticle.createMany({ data: seedData.news });
 }
 
 main()

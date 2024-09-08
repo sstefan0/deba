@@ -1,19 +1,7 @@
-import React, { useState } from "react";
-import {
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Divider,
-  Box,
-  Button,
-} from "@mui/material";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
+import { useState } from "react";
+import { Container, Typography, Button } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import callApi from "../../api/api";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import MainArticle from "../../components/mainArticle/mainArticle";
 import NewsArticleCard from "../../components/newsArticle/newsArticle";

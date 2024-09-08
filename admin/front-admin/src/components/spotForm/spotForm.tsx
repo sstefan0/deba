@@ -10,7 +10,7 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { LatLng } from "leaflet";
+import { LatLng, LatLngExpression } from "leaflet";
 import callApi from "../../api/api";
 
 type Inputs = {
@@ -36,7 +36,7 @@ export default function SpotForm(props: any) {
     const map = useMapEvents({
       click(e) {
         setPosition(e.latlng);
-        setValue("location", e.latlng);
+        setValue("location", e.latlng as unknown as string);
       },
     });
 
@@ -53,7 +53,7 @@ export default function SpotForm(props: any) {
   }, []);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-      <Box sx={{ flexGrow: 1, width: "100%" }}>
+      <Box sx={{ flexGrow: 1, width: "100%", padding: "1rem" }}>
         <Typography
           variant="h4"
           textAlign={"left"}
@@ -73,8 +73,8 @@ export default function SpotForm(props: any) {
           </span>
           Osnovne informacije
         </Typography>
-        <Grid container spacing={1}>
-          <Grid xs={3} container spacing={3}>
+        <Grid container spacing={1} sx={{ padding: "1rem" }}>
+          <Grid xs={12} md={3} container spacing={3}>
             <Grid xs={12}>
               <TextField
                 label="Naziv"
@@ -107,7 +107,7 @@ export default function SpotForm(props: any) {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={1} xs={5}>
+          <Grid container spacing={1} xs={12} md={5}>
             <Grid xs={12}>
               <TextField
                 label="Opis"
@@ -119,7 +119,7 @@ export default function SpotForm(props: any) {
               />
             </Grid>
           </Grid>
-          <Grid container xs={4}>
+          <Grid container xs={12} md={4}>
             <Grid xs={12}>
               <TextField
                 sx={{ display: "none" }}

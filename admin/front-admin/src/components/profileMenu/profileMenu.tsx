@@ -26,6 +26,8 @@ export default function ProfileMenu(props: any) {
 
   const handleProfile = () => {
     navigate(`/dashboard/urediNalog/${props.userId}`);
+    handleClose();
+    props.closeHandler();
   };
 
   return (
