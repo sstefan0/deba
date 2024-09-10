@@ -1,4 +1,3 @@
-// Import necessary React and Material-UI components
 import { useEffect, useState } from "react";
 import {
   TextField,
@@ -17,11 +16,9 @@ import { styled } from "@mui/system";
 import callApi from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "../../util/get-auth";
-import { useDispatch } from "react-redux";
 import CheckIcon from "@mui/icons-material/Check";
-// Custom styling using Material-UI's styled API
+
 const BackgroundContainer = styled(Container)({
-  backgroundImage: "url(https://source.unsplash.com/random)",
   backgroundSize: "cover",
   backgroundPosition: "center",
   height: "100vh",
@@ -52,13 +49,11 @@ const StyledButton = styled(Button)({
 });
 
 const ForgotPasswordPage = () => {
-  // State for storing form values
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = getAuth();
   useEffect(() => {
     if (user) navigate("/dashboard/turistickaMjesta");
@@ -69,13 +64,10 @@ const ForgotPasswordPage = () => {
       event.preventDefault();
       setIsLoading(true);
       const response = await callApi.Auth.forgotPassword({ email });
-
       if (response) {
         setIsLoading(false);
         setIsSuccess(true);
       }
-
-      //   navigate("/turistickaMjesta");
     } catch (e) {
       setError("Pogrešan email ili lozinka");
       setIsLoading(false);

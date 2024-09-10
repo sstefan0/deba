@@ -2,10 +2,10 @@ import {
   Button,
   Typography,
   Box,
-  Backdrop,
   SpeedDial,
   SpeedDialAction,
   Avatar,
+  IconButton,
 } from "@mui/material";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import L, { LatLngExpression } from "leaflet";
@@ -21,6 +21,9 @@ import RestaurantOutlinedIcon from "@mui/icons-material/RestaurantOutlined";
 import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlined";
 import HikingOutlinedIcon from "@mui/icons-material/HikingOutlined";
 import "./presentationPage.css";
+import ChevronRight from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import CloseIcon from "@mui/icons-material/Close";
 
 const PresentationPage = () => {
   const data: any = useLoaderData();
@@ -29,12 +32,12 @@ const PresentationPage = () => {
   const [types, setTypes] = useState<any>([]);
   const [selectedType, setSelectedType] = useState("");
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(!open);
   const [recommendations, setRecommendations] = useState<any>([]);
   const [center, setCenter] = useState<LatLngExpression>([
     43.78397533223712, 19.29362293065251,
   ]);
+  const [recommendationsVisible, setRecommendationsVisible] = useState(true);
   const [zoom, setZoom] = useState(15);
   const iconsList = [
     <ForestOutlinedIcon />,
@@ -43,7 +46,7 @@ const PresentationPage = () => {
     <DirectionsBikeOutlinedIcon />,
     <HikingOutlinedIcon />,
   ];
-  console.log(data);
+
   useEffect(() => {
     const fetchTypes = async () => {
       const types = await callApi.TouristSpots.getTypes();
@@ -72,7 +75,6 @@ const PresentationPage = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      {/* The map container */}
       <MapContainer
         center={center}
         zoom={zoom}
@@ -93,29 +95,60 @@ const PresentationPage = () => {
                 key={spot.id}
                 spot={spot}
                 iconUrl={typeIcons[spot.type]}
-                setCenter={setCenter} // Pass function to set the map center
+                setCenter={setCenter}
               />
             )
         )}
       </MapContainer>
 
-      {/* Example of overlay elements */}
+      <IconButton
+        sx={{
+          position: "absolute",
+          top: "1%",
+          left: "0.5%",
+          display: selectedType === "" ? "none" : "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          borderRadius: "50%",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",
+          padding: "8px",
+          transition: "background-color 0.3s, box-shadow 0.3s",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
+          },
+          "&:focus": {
+            outline: "none",
+          },
+          zIndex: "10001",
+        }}
+        onClick={() => {
+          setRecommendationsVisible(!recommendationsVisible);
+        }}
+      >
+        {recommendationsVisible ? <ChevronLeftIcon /> : <ChevronRight />}
+      </IconButton>
+
       <div
         className="categories-div"
         style={{
           position: "absolute",
-          top: "0%",
+          top: "0",
           height: "100%",
           left: "0",
           zIndex: 1000,
-          display: isMobile && selectedType !== "" ? "none" : "flex",
+          display: "flex",
           background:
             "linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.65), rgba(0,0,0,0.5), rgba(0,0,0,0.4), rgba(0,0,0,0))",
           backgroundSize: "cover",
           padding: "10px",
-          // display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          transform: recommendationsVisible
+            ? "translateX(0)"
+            : "translateX(-110%)",
+          transition: "transform 0.5s ease-in-out",
         }}
       >
         {selectedType === "" ? (
@@ -143,13 +176,13 @@ const PresentationPage = () => {
                   "&:hover": { outline: "none", border: "none" },
                 }}
                 onClick={() => {
-                  setSelectedType(type.name), console.log("centaaar");
+                  setSelectedType(type.name);
                   setCenter([
                     recommendations[type.name].lat,
                     recommendations[type.name].lon,
                   ]);
-                  console.log(recommendations[type.name]);
                   setZoom(16);
+                  if (isMobile) setRecommendationsVisible(false);
                 }}
               >
                 {type.name}
@@ -157,49 +190,44 @@ const PresentationPage = () => {
             ))}
           </>
         ) : (
-          !isMobile && (
-            <>
-              <Typography variant="h5">Preporuka</Typography>
-              <img
-                src={recommendations[selectedType].Image[0].imageURL}
-                style={{
-                  width: "80%",
-                  alignSelf: "center",
-                  borderRadius: "15px",
-                  border: "1px solid white",
-                }}
-              ></img>
-              <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
-                {recommendations[selectedType].name}
-              </Typography>
-              {/* <img
+          <>
+            <Typography variant="h6" textAlign={"center"}>
+              Preporuka
+            </Typography>
+            <img
               src={recommendations[selectedType].Image[0].imageURL}
-              alt="slikica"
-              ></img> */}
-              <Typography variant="body1" sx={{ mb: 4 }}>
-                {recommendations[selectedType].description.substring(0, 300)}...
-              </Typography>
-              <Link
-                to={`/view/${recommendations[selectedType].id}`}
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                <Button sx={{ color: "white", "&:focus": { outline: "none" } }}>
-                  Prikaži više
-                </Button>
-              </Link>
-            </>
-          )
+              style={{
+                width: "80%",
+                alignSelf: "center",
+                borderRadius: "15px",
+                border: "1px solid white",
+              }}
+            ></img>
+            <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
+              {recommendations[selectedType].name}
+            </Typography>
+
+            <Typography variant="body1" sx={{ mb: 4 }}>
+              {recommendations[selectedType].description.substring(0, 300)}...
+            </Typography>
+            <Link
+              to={`/view/${recommendations[selectedType].id}`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button sx={{ color: "white", "&:focus": { outline: "none" } }}>
+                Prikaži više
+              </Button>
+            </Link>
+          </>
         )}
       </div>
 
       {selectedType !== "" && (
         <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
-          <Backdrop open={open} />
           <SpeedDial
             ariaLabel="SpeedDial tooltip example"
             sx={{ position: "absolute", bottom: 16, right: 16 }}
-            icon={<FilterAltOutlinedIcon />}
-            onClose={handleClose}
+            icon={open ? <CloseIcon /> : <FilterAltOutlinedIcon />}
             onClick={handleOpen}
             open={open}
           >
@@ -208,13 +236,18 @@ const PresentationPage = () => {
                 key={action.name}
                 icon={action.icon}
                 tooltipTitle={action.name}
-                onClick={() => {
-                  setSelectedType(action.name), console.log("centaaar");
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedType(action.name);
                   setCenter([
                     recommendations[action.name].lat,
                     recommendations[action.name].lon,
                   ]);
                   setZoom(16);
+
+                  if (!isMobile) setRecommendationsVisible(true);
+
+                  setOpen(true);
                 }}
                 sx={{
                   background:
@@ -233,8 +266,6 @@ function ChangeView({ center, zoom }: { center: LatLngExpression; zoom: any }) {
   const map = useMap();
 
   useEffect(() => {
-    console.log(center);
-
     map.flyTo(center, zoom, { duration: 0.5 });
   }, [center, zoom, map]);
 
@@ -245,11 +276,10 @@ function CustomMarker({ spot, iconUrl, setCenter }: any) {
   const map = useMap();
 
   const handleMarkerClick = () => {
-    // Set the center of the map to the marker's position
     map.flyTo([spot.lat, spot.lon], 15, {
-      duration: 1.5, // Duration of the fly animation (optional)
+      duration: 1.5,
     });
-    setCenter([spot.lat, spot.lon]); // Update center state (optional)
+    setCenter([spot.lat, spot.lon]);
   };
 
   return (

@@ -19,7 +19,7 @@ const RegisterPage = () => {
   const submitHandler = async (data: any) => {
     try {
       setIsLoading(true);
-      const newAccount = await callApi.Auth.register(data);
+      await callApi.Auth.register(data);
 
       setIsLoading(false);
       setIsSuccess(true);

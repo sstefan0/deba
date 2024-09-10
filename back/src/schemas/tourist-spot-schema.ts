@@ -1,4 +1,3 @@
-import { query } from "express";
 import * as yup from "yup";
 
 export const addSpotSchema = yup.object({

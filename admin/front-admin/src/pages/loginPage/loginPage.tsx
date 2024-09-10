@@ -1,4 +1,3 @@
-// Import necessary React and Material-UI components
 import { useEffect, useState } from "react";
 import {
   TextField,
@@ -19,7 +18,6 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/user-slice";
 import { Link } from "react-router-dom";
 
-// Custom styling using Material-UI's styled API
 const BackgroundContainer = styled(Container)({
   backgroundImage: "url(https://source.unsplash.com/random)",
   backgroundSize: "cover",
@@ -52,7 +50,6 @@ const StyledButton = styled(Button)({
 });
 
 const Login = () => {
-  // State for storing form values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

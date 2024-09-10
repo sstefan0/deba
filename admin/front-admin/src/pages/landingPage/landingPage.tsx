@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  IconButton,
-  Grid,
-  keyframes,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Box, Typography, Button, keyframes } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
@@ -20,37 +9,34 @@ const sections = [
   {
     title: "Otkrijte Višegrad",
     subtitle: "ISTORIJSKI GRAD NA DRINI",
-    description: `Višegrad je grad poznat po svojoj bogatoj istoriji i kulturnom nasleđu. Smešten na obalama reke Drine, nudi jedinstven spoj prirodnih lepota i istorijskih znamenitosti. Posetioci mogu uživati u šetnjama pored reke, istraživanju lokalnih muzeja i uživanju u autentičnoj bosanskoj kuhinji.`,
-    bgImage:
-      "url(https://images.pexels.com/photos/12039781/pexels-photo-12039781.jpeg)", // Zamenite sa pravim URL-om slike
+    description: `Višegrad je grad poznat po svojoj bogatoj istoriji i kulturnom naslijeđu. Smješten na obalama rijeke Drine, nudi jedinstven spoj prirodnih ljepota i istorijskih znamenitosti. Posjetioci mogu uživati u šetnjama pored rijeke, istraživanju lokalnih muzeja i uživanju u autentičnoj bosanskoj kuhinji.`,
+    bgImage: "url(prvaslika.jpeg)",
   },
   {
     title: "Most Mehmed Paše Sokolovića",
     subtitle: "UNESCO SPOMENIK KULTURE",
-    description: `Ovaj veličanstveni most iz 16. veka predstavlja remek-delo osmanske arhitekture. Most Mehmed Paše Sokolovića, delo čuvenog graditelja Mimara Sinana, danas je pod zaštitom UNESCO-a. Preko reke Drine, most povezuje ne samo dve obale već i bogatu istoriju Višegrada sa svetom.`,
-    bgImage:
-      "url(https://images.pexels.com/photos/20305455/pexels-photo-20305455/free-photo-of-mehmed-pasa-sokolovic-bridge-in-visegrad-bosnia-and-herzegovina.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)", // Zamenite sa pravim URL-om slike
+    description: `Ovaj veličanstveni most iz 16. vijeka predstavlja remek-djelo osmanske arhitekture. Most Mehmed Paše Sokolovića, djelo čuvenog graditelja Mimara Sinana, danas je pod zaštitom UNESCO-a. Preko rijeke Drine, most povezuje ne samo dvije obale već i bogatu istoriju Višegrada sa svijetom.`,
+    bgImage: "url(drugaslika.jpeg)",
   },
   {
     title: "Andrićgrad",
-    subtitle: "GRAD OD KAMENA POSVEĆEN IVO ANDRIĆU",
-    description: `Andrićgrad je kulturni, obrazovni, i turistički kompleks inspirisan delima Ive Andrića, dobitnika Nobelove nagrade za književnost. Grad od kamena simbolizuje bogato kulturno nasleđe Višegrada i Balkana, sa mešavinom arhitektonskih stilova iz različitih perioda istorije.`,
-    bgImage: "url(andricgrad.jpg)", // Zamenite sa pravim URL-om slike
+    subtitle: "GRAD OD KAMENA POSVEĆEN ANDRIĆU",
+    description: `Andrićgrad je kulturni, obrazovni, i turistički kompleks inspirisan djelima Ive Andrića, dobitnika Nobelove nagrade za književnost. Grad od kamena simbolizuje bogato kulturno naslijeđe Višegrada i Balkana, sa mješavinom arhitektonskih stilova iz različitih perioda istorije.`,
+    bgImage: "url(andricgrad.jpg)",
   },
   {
     title: "Višegradska Banja",
-    subtitle: "IZVORI LEKOVITE VODE",
-    description: `Višegradska Banja je poznata po svojim termalnim izvorima i lekovitoj vodi koja pomaže u lečenju reumatskih i kožnih oboljenja. Idealno mesto za opuštanje i rehabilitaciju u prelepom prirodnom okruženju.`,
-    bgImage: "url(banja.jpg)", // Zamenite sa pravim URL-om slike
+    subtitle: "IZVORI LJEKOVITE VODE",
+    description: `Višegradska Banja je poznata po svojim termalnim izvorima i ljekovitoj vodi koja pomaže u liječenju reumatskih i kožnih oboljenja. Idealno mjesto za opuštanje i rehabilitaciju u prelijepom prirodnom okruženju.`,
+    bgImage: "url(banja.jpg)",
   },
   {
     title: "Istražite Višegrad",
     subtitle: "VAŠA PUSTOLOVINA ČEKA",
-    description: `Višegrad je grad bogat istorijom, kulturom i prirodnim lepotama, pružajući vam nezaboravno iskustvo. Od veličanstvenog Mosta Mehmed Paše Sokolovića do kulturnog kompleksa Andrićgrad i opuštanja u Višegradskoj Banji, svaki kutak ovog grada priča svoju jedinstvenu priču. Ne propustite priliku da istražite sve što Višegrad nudi i stvorite svoja vlastita nezaboravna sećanja.`,
+    description: `Višegrad je grad bogat istorijom, kulturom i prirodnim ljepotama, pružajući vam nezaboravno iskustvo. Od veličanstvenog Mosta Mehmed Paše Sokolovića do kulturnog kompleksa Andrićgrad i opuštanja u Višegradskoj Banji, svaki kutak ovog grada priča svoju jedinstvenu priču. Ne propustite priliku da istražite sve što Višegrad nudi i stvorite svoja vlastita nezaboravna sjećanja.`,
     bgImage: "url(visegrad.jpg)", // Zamenite sa pravim URL-om slike
     url: "/map",
   },
-  // Add more sections as needed
 ];
 
 const HomePage: React.FC = () => {
@@ -71,8 +57,8 @@ const HomePage: React.FC = () => {
       sx={{
         width: "100%",
         height: "100vh",
-        overflowY: "auto", // Allows vertical scrolling
-        scrollSnapType: "y mandatory", // Enables snap scroll
+        overflowY: "auto",
+        scrollSnapType: "y mandatory",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -80,7 +66,7 @@ const HomePage: React.FC = () => {
       {sections.map((section, index) => (
         <Box
           sx={{
-            scrollSnapAlign: "start", // Makes each section snap to the top
+            scrollSnapAlign: "start",
             scrollBehavior: "smooth",
             position: "relative",
             height: "100vh",
@@ -96,10 +82,9 @@ const HomePage: React.FC = () => {
               height: "100%",
               backgroundImage: section.bgImage,
 
-              filter: "blur(8px)", // Apply blur here
+              filter: "blur(8px)",
 
-              zIndex: -0, // Ensure overlay is behind content but on top of the background
-              //   borderRadius: "20px",
+              zIndex: -0,
             },
           }}
         >
@@ -123,17 +108,12 @@ const HomePage: React.FC = () => {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(0, 0, 0,0.5)", // Dark overlay with 50% opacity
-                zIndex: 1, // Ensure overlay is behind content but on top of the background
+                backgroundColor: "rgba(0, 0, 0,0.5)",
+                zIndex: 1,
                 borderRadius: "20px",
               },
-              //   scrollSnapAlign: "start", // Makes each section snap to the top
-              //   scrollBehavior: "smooth",
             }}
           >
-            {/* Header */}
-
-            {/* Main Content */}
             <Grid2
               zIndex={2}
               spacing={1}
@@ -142,8 +122,6 @@ const HomePage: React.FC = () => {
               height={"70%"}
               alignItems={"center"}
               width={"100%"}
-              //   justifyContent={"center"}
-              //   marginLeft={"50px"}
             >
               <Grid2
                 sm={12}
@@ -173,12 +151,10 @@ const HomePage: React.FC = () => {
               </Grid2>
             </Grid2>
 
-            {/* Social Media Links */}
             <Box
               sx={{
                 position: "absolute",
                 bottom: "5%",
-                // left: "10%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -191,9 +167,7 @@ const HomePage: React.FC = () => {
                   sx={{
                     width: "50px",
                     height: "50px",
-                    //   transform: "rotate(45deg)",
                     position: "relative",
-                    //   margin: 0 auto;
                     animation: `${bounce} 1s infinite`,
                   }}
                 />

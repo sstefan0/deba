@@ -1,4 +1,12 @@
-import { Box, Container, Paper, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  Divider,
+  Tooltip,
+  IconButton,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import "leaflet/dist/leaflet.css";
 import ImagesList from "../../components/imagesList/imagesList";
@@ -7,6 +15,7 @@ import { useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import callApi from "../../api/api";
 import NewsArticleCard from "../../components/newsArticle/newsArticle";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const ArticlePage = () => {
   const loaderData: any = useLoaderData();
@@ -19,7 +28,28 @@ const ArticlePage = () => {
     };
     fetchLatest();
   }, []);
+  const handleDownload = async () => {
+    for (const file of loaderData.Document) {
+      try {
+        const response = await fetch(
+          `https://cors-anywhere.herokuapp.com/${file.docURL}`
+        );
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
 
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = file.name || "default_filename";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Download error:", error);
+      }
+    }
+  };
   return (
     <Container
       maxWidth="xl"
@@ -60,18 +90,43 @@ const ArticlePage = () => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "flex-end",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                   gap: "10px",
                 }}
               >
-                <Typography variant="caption" textAlign={"left"}>
-                  Novost
-                </Typography>
-                |
-                <Typography variant="caption" textAlign={"left"}>
-                  {new Date(loaderData.createdAt).toLocaleDateString("en-UK")}
-                </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-end",
+                    gap: "10px",
+                  }}
+                >
+                  <Typography variant="caption" textAlign={"left"}>
+                    Novost
+                  </Typography>
+                  |
+                  <Typography variant="caption" textAlign={"left"}>
+                    {new Date(loaderData.createdAt).toLocaleDateString("en-UK")}
+                  </Typography>
+                </div>
+                {loaderData.Document.length > 0 && (
+                  <Tooltip title="Preuzmi dodatni sadržaj" arrow>
+                    <IconButton
+                      sx={{
+                        "&:focus": { outline: "none" },
+                        "&:hover": {
+                          // color: loaderData.type.color,
+                          background: "none",
+                        },
+                      }}
+                      onClick={handleDownload}
+                    >
+                      <DownloadIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
               </div>
               <Typography
                 variant="h3"

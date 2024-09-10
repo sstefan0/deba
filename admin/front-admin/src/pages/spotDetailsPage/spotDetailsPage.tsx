@@ -1,4 +1,10 @@
-import { Box, Container, Paper, Typography } from "@mui/material";
+import {
+  Container,
+  IconButton,
+  Paper,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import MapChart from "../../components/mapChart/mapChart";
 import "leaflet/dist/leaflet.css";
@@ -8,9 +14,35 @@ import YouTube from "react-youtube";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useLoaderData } from "react-router-dom";
+import LanguageIcon from "@mui/icons-material/Language";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const SpotDetailsPage = () => {
   const loaderData: any = useLoaderData();
+
+  const handleDownload = async () => {
+    for (const file of loaderData.Document) {
+      try {
+        const response = await fetch(
+          `https://cors-anywhere.herokuapp.com/${file.docURL}`
+        );
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = file.name || "default_filename";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Download error:", error);
+      }
+    }
+  };
+
   return (
     <Container
       maxWidth="xl"
@@ -38,20 +70,19 @@ const SpotDetailsPage = () => {
               sx={{
                 padding: "3rem 4rem",
                 borderRadius: "25px",
-                // backgroundColor: "#fff",
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
                 position: "relative",
-                top: "-100px", // Adjust this value as needed
-                width: "calc(100% - 20px)", // Adjust based on padding
-                margin: "0 auto", // Center align the Paper
+                top: "-100px",
+                width: "calc(100% - 20px)",
+                margin: "0 auto",
                 boxSizing: "border-box",
-                zIndex: 1, // Ensure it sits above the image
+                zIndex: 1,
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start",
+                  justifyContent: "space-between",
                   alignItems: "flex-end",
                   gap: "10px",
                 }}
@@ -63,6 +94,46 @@ const SpotDetailsPage = () => {
                 >
                   {loaderData.type.name}
                 </Typography>
+                <div>
+                  {loaderData.webSite && (
+                    <Tooltip title="Zvanični sajt" arrow>
+                      <IconButton
+                        href={
+                          loaderData.webSite.startsWith("http://") ||
+                          loaderData.webSite.startsWith("https://")
+                            ? loaderData.webSite
+                            : `https://${loaderData.webSite}`
+                        }
+                        target="_blank"
+                        sx={{
+                          "&:focus": { outline: "none" },
+                          "&:hover": {
+                            color: loaderData.type.color,
+                            background: "none",
+                          },
+                        }}
+                      >
+                        <LanguageIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                  {loaderData.Document.length > 0 && (
+                    <Tooltip title="Preuzmi dodatni sadržaj" arrow>
+                      <IconButton
+                        sx={{
+                          "&:focus": { outline: "none" },
+                          "&:hover": {
+                            color: loaderData.type.color,
+                            background: "none",
+                          },
+                        }}
+                        onClick={handleDownload}
+                      >
+                        <DownloadIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </div>
               </div>
               <Typography
                 variant="h3"
@@ -122,6 +193,7 @@ const SpotDetailsPage = () => {
               </Paper>
             </Grid>
           )}
+
           <Grid xs={12}>
             <MapChart
               lat={loaderData.lat}

@@ -3,6 +3,7 @@ import authorize from "../middleware/auth-middleware";
 import { Role } from "@prisma/client";
 import multer from "multer";
 import {
+  deleteDocumentController,
   deleteImageController,
   uploadFilesController,
   uploadImageController,
@@ -10,6 +11,7 @@ import {
 import googleMiddleware from "../middleware/google-middleware";
 import validate from "../middleware/validation-middleware";
 import { getByIdSchema } from "../schemas/tourist-spot-schema";
+import { get } from "http";
 
 const router = express.Router();
 
@@ -51,6 +53,13 @@ router.delete(
   authorize([Role.ADMIN, Role.USER]),
   validate(getByIdSchema),
   deleteImageController
+);
+
+router.delete(
+  "/deleteFile",
+  authorize([Role.ADMIN, Role.USER]),
+  validate(getByIdSchema),
+  deleteDocumentController
 );
 
 export default router;

@@ -5,15 +5,13 @@ import SpotsCount from "../../components/spotsCount/spotsCount";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import { getAuth } from "../../util/get-auth";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Backdrop, CircularProgress, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
 const AccountsPage = () => {
   const navigate = useNavigate();
-  const [newsCount, setNewsCount] = useState(0);
-  const [page, setPage] = useState(1);
   const [authorized, setAuthorized] = useState(false);
   const [stats, setStats] = useState<any>({});
   const user = getAuth();
@@ -22,13 +20,7 @@ const AccountsPage = () => {
     if (!user) navigate("/login");
     else setAuthorized(true);
   }, [user]);
-  const fetchCount = async () => {
-    const count = await callApi.News.getCount();
-    setNewsCount(count);
-  };
-  useEffect(() => {
-    fetchCount();
-  }, []);
+
   const tableData = useLoaderData() as any;
   useEffect(() => {
     const fetchStats = async () => {
@@ -64,7 +56,7 @@ const AccountsPage = () => {
           <Grid xs={12} container justifyContent={"center"}></Grid>
         </Grid>
       </Box>
-      <Link to={"register"}>
+      <Link to={"/dashboard/register"}>
         <Fab
           variant="extended"
           sx={{ position: "fixed", bottom: "3%", right: "1%" }}

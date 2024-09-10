@@ -35,7 +35,6 @@ export default function ResponsiveDrawer() {
   const navigate = useNavigate();
   const userId = useSelector((state: RootState) => state.user.id);
   const storedRole = useSelector((state: RootState) => state.user.role);
-  console.log(userId.length);
   const user = getAuth();
 
   useEffect(() => {
@@ -74,7 +73,7 @@ export default function ResponsiveDrawer() {
           <ListItem key={"Turisticka mjesta"} disablePadding>
             <ListItemButton
               component={Link}
-              to="turistickaMjesta" // Add the path you want to navigate to
+              to="turistickaMjesta"
               onClick={() => {
                 setPageTitle("Turistička mjesta");
                 handleDrawerClose();
@@ -89,7 +88,7 @@ export default function ResponsiveDrawer() {
           <ListItem key={"Novosti"} disablePadding>
             <ListItemButton
               component={Link}
-              to="novosti/1" // Add the path you want to navigate to
+              to="novosti/1"
               onClick={() => {
                 setPageTitle("Novosti");
                 handleDrawerClose();
@@ -105,7 +104,7 @@ export default function ResponsiveDrawer() {
             <ListItem key={"Korisnički nalozi"} disablePadding>
               <ListItemButton
                 component={Link}
-                to="korisnickiNalozi" // Add the path you want to navigate to
+                to="korisnickiNalozi"
                 onClick={() => {
                   setPageTitle("Korisnički nalozi");
                   handleDrawerClose();
@@ -141,9 +140,6 @@ export default function ResponsiveDrawer() {
             </Typography>
           </div>
           <ProfileMenu userId={userId} closeHandler={handleDrawerClose} />
-          {/* <Button variant="text">
-            <SettingsIcon />
-          </Button> */}
         </Toolbar>
       </div>
     </div>
@@ -179,14 +175,13 @@ export default function ResponsiveDrawer() {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },

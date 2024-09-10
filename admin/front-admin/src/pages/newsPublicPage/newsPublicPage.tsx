@@ -13,7 +13,6 @@ const NewsPublicPage = () => {
   const [page, setPage] = useState(1);
   const [end, setEnd] = useState(10);
   const [endReached, setEndReached] = useState(false);
-  console.log(displayData);
 
   const handleClick = async () => {
     try {
@@ -50,7 +49,7 @@ const NewsPublicPage = () => {
               justifyContent: "center",
               gap: "5px",
               width: "100%",
-              height: "100%", // Make sure this div fills the grid cell
+              height: "100%",
             }}
           >
             <MainArticle article={news[0]} />
@@ -64,7 +63,7 @@ const NewsPublicPage = () => {
               justifyContent: "center",
               gap: "5px",
               width: "100%",
-              height: "100%", // Make sure this div fills the grid cell
+              height: "100%",
             }}
           >
             {news.slice(1, 6).map((article: any) => (

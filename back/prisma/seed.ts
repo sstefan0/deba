@@ -12,11 +12,13 @@ async function main() {
   const deleteUsers = prisma.user.deleteMany();
   const deleteSpots = prisma.tourismPotential.deleteMany();
   const deleteNews = prisma.newsArticle.deleteMany();
+  const deleteDocs = prisma.document.deleteMany();
 
   await deleteNews;
   await deleteSpots;
   await deleteTypes;
   await deleteUsers;
+  await deleteDocs;
 
   await prisma.user.createMany({ data: users });
   await prisma.potentialType.createMany({ data: seedData.potentialType });

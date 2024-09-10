@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   CircularProgress,
@@ -12,6 +13,10 @@ import {
   ImageList,
   ImageListItem,
   InputLabel,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,6 +27,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import callApi from "../../api/api";
+import FolderIcon from "@mui/icons-material/Folder";
 
 type Inputs = {
   title: string;
@@ -42,9 +48,15 @@ const NewsForm = (props: any) => {
   const [loadedImages, setLoadedImages] = useState(
     props.data ? props.data.Image : null
   );
+  const [loadedDocs, setLoadedDocs] = useState(
+    props.data ? props.data.Document : null
+  );
   const [imageOpen, setImageOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<string | null>(null);
+  const [docsOpen, setDocsOpen] = useState(false);
+  const [docIndex, setDocIndex] = useState(-1);
+  const [docToDelete, setDocToDelete] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
   const handleDeleteImage = (imageId: string, index: number) => {
@@ -57,12 +69,11 @@ const NewsForm = (props: any) => {
     if (imageToDelete) {
       try {
         setLoading(true);
-        const response = await callApi.Upload.deleteImage(imageToDelete);
+        await callApi.Upload.deleteImage(imageToDelete);
         setDeleteDialogOpen(false);
         setImageToDelete(null);
         const newArray = loadedImages;
         newArray.splice(imageIndex, 1);
-        console.log(newArray);
         setLoadedImages(newArray);
         setImageIndex(-1);
         setLoading(false);
@@ -71,6 +82,30 @@ const NewsForm = (props: any) => {
         setLoading(false);
       }
     }
+  };
+  const confirmDeleteDocument = async () => {
+    if (docToDelete) {
+      try {
+        setLoading(true);
+        await callApi.Upload.deleteFile(docToDelete);
+        setDeleteDialogOpen(false);
+        setDocToDelete(null);
+        const newArray = loadedDocs;
+        newArray.splice(docIndex, 1);
+        setLoadedDocs(newArray);
+        setDocIndex(-1);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleDeleteDoc = (docId: string, index: number) => {
+    setDocToDelete(docId);
+    setDocIndex(index);
+    setDeleteDialogOpen(true);
   };
 
   const handleCloseDialog = () => {
@@ -105,6 +140,8 @@ const NewsForm = (props: any) => {
             <Grid xs={12}>
               <TextField
                 label="Naslov"
+                error={errors.title as unknown as boolean}
+                helperText={errors.title ? "Ovo polje je obavezno" : ""}
                 fullWidth
                 {...register("title", { required: true })}
               />
@@ -116,13 +153,14 @@ const NewsForm = (props: any) => {
                 label="Tekst"
                 fullWidth
                 multiline
+                error={Boolean(errors.description)}
+                helperText={errors.description ? "Ovo polje je obavezno" : ""}
                 minRows={8}
                 maxRows={10}
                 {...register("description", { required: true })}
               />
             </Grid>
             <Grid xs={12} justifyContent={"flex-start"}>
-              {/* Image Dropdown */}
               {props.data && (
                 <Box sx={{ marginBottom: 2 }}>
                   <Button
@@ -186,15 +224,64 @@ const NewsForm = (props: any) => {
                   </Collapse>
                 </Box>
               )}
+              {props.data && props.data.Document.length > 0 && (
+                <>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setDocsOpen(!docsOpen)}
+                    endIcon={docsOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    fullWidth
+                  >
+                    {imageOpen ? "Sakrij pdf datoteke" : "Prikaži pdf datoteke"}
+                  </Button>
+                  <Collapse in={docsOpen}>
+                    <Box
+                      sx={{
+                        maxHeight: 200,
+                        overflowY: "auto",
+                        marginBottom: 2,
+                        marginTop: 2,
+                      }}
+                    >
+                      <List dense={false}>
+                        {props.data.Document.map((doc: any, index: number) => (
+                          <ListItem
+                            secondaryAction={
+                              <IconButton
+                                onClick={() => handleDeleteDoc(doc.id, index)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            }
+                          >
+                            <ListItemAvatar>
+                              <Avatar>
+                                <FolderIcon />
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={doc.name}
+                              secondary={"PDF"}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  </Collapse>
+                </>
+              )}
               <InputLabel>Fotografije</InputLabel>
               <TextField
                 type="file"
-                inputProps={{ accept: "image/*", multiple: true }}
-                {...register("images", { required: !props.data })}
+                error={Boolean(errors.images)}
+                inputProps={{
+                  accept: "image/*, application/pdf",
+                  multiple: true,
+                }}
+                {...register("images", {})}
                 fullWidth
                 sx={{ marginBottom: 2 }}
               />
-              {errors.images && <span>This field is required</span>}
             </Grid>
           </Grid>
 
@@ -222,23 +309,25 @@ const NewsForm = (props: any) => {
           <Button onClick={handleCloseDialog} color="primary">
             Otkaži
           </Button>
-          <Button onClick={confirmDeleteImage} color="error" autoFocus>
-            <Button onClick={confirmDeleteImage} color="error" autoFocus>
-              {loading ? (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-12px",
-                    marginLeft: "-12px",
-                  }}
-                />
-              ) : (
-                "Obriši"
-              )}
-            </Button>
+          <Button
+            onClick={imageToDelete ? confirmDeleteImage : confirmDeleteDocument}
+            color="error"
+            autoFocus
+          >
+            {loading ? (
+              <CircularProgress
+                size={24}
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            ) : (
+              "Obriši"
+            )}
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,5 +1,5 @@
 import NewspaperOutlined from "@mui/icons-material/NewspaperOutlined";
-import { Typography, Box, Paper, Grid } from "@mui/material";
+import { Typography, Box, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const NewsArticleCard = (props: any) => {
@@ -24,7 +24,7 @@ const NewsArticleCard = (props: any) => {
       const time = Math.floor(differenceInSeconds / interval.seconds);
 
       if (time >= 1) {
-        return `Prije ${time} ${interval.label}${time !== 1 ? "s" : ""}`;
+        return `Prije ${time} ${interval.label}`;
       }
     }
 
@@ -53,7 +53,6 @@ const NewsArticleCard = (props: any) => {
           color: "white",
         }}
       >
-        {/* Left Side: Image */}
         <Box
           sx={{
             flexShrink: 0,
@@ -71,9 +70,7 @@ const NewsArticleCard = (props: any) => {
           />
         </Box>
 
-        {/* Right Side: Text Content */}
         <Box sx={{ marginLeft: "15px" }}>
-          {/* News Source */}
           <Typography variant="subtitle2" sx={{ display: "flex", gap: "5px" }}>
             <NewspaperOutlined />
 
@@ -81,7 +78,6 @@ const NewsArticleCard = (props: any) => {
             <span>• {timeAgo(props.article.createdAt)}</span>
           </Typography>
 
-          {/* Headline */}
           <Typography
             variant="body1"
             fontWeight="bold"
@@ -91,15 +87,11 @@ const NewsArticleCard = (props: any) => {
             {props.article.title}
           </Typography>
 
-          {/* Category and Reading Time */}
           <Typography
             variant="body2"
             textAlign={"left"}
             sx={{ display: "flex", gap: "10px" }}
           >
-            {/* <span style={{ color: "red", fontWeight: "bold" }}>
-            {props.article.category || "Business"}
-          </span> */}
             <span>{props.article.description.substring(0, 50)}...</span>
           </Typography>
         </Box>

@@ -44,8 +44,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        // Redirect the root path to "/turistickaMjesta"
-        index: true, // This matches the root path "/"
+        index: true,
         element: <Navigate to="turistickaMjesta" replace />,
       },
       {
@@ -143,8 +142,7 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        // Redirect the root path to "/turistickaMjesta"
-        index: true, // This matches the root path "/"
+        index: true,
         element: <Navigate to="home" replace />,
       },
       {

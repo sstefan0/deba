@@ -1,4 +1,3 @@
-// Import necessary React and Material-UI components
 import { useEffect, useState } from "react";
 import {
   TextField,
@@ -18,7 +17,7 @@ import callApi from "../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAuth } from "../../util/get-auth";
 import CheckIcon from "@mui/icons-material/Check";
-// Custom styling using Material-UI's styled API
+
 const BackgroundContainer = styled(Container)({
   backgroundImage: "url(https://source.unsplash.com/random)",
   backgroundSize: "cover",
@@ -51,7 +50,6 @@ const StyledButton = styled(Button)({
 });
 
 const ResetPasswordPage = () => {
-  // State for storing form values
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);

@@ -37,7 +37,6 @@ const NewsCard = (props: any) => {
         display: "flex",
         flexDirection: "column",
         borderRadius: "10px",
-        // maxWidth: "400px",
         boxSizing: "border-box",
         height: "100%",
         width: "100%",
@@ -59,7 +58,6 @@ const NewsCard = (props: any) => {
           padding: "1.5rem",
         }}
       >
-        {/* Left Side: Image */}
         <Box
           sx={{
             flexShrink: 0,

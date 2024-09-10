@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Alert,
   Button,
@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
   Paper,
   useMediaQuery,
 } from "@mui/material";
@@ -22,6 +23,7 @@ import { useState } from "react";
 import { TouristSpotData } from "../../pages/touristSpots/touristSpotsPage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import callApi from "../../api/api";
+import CloseIcon from "@mui/icons-material/Close";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,12 +49,10 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const [displayAlert, setDisplayAlert] = useState(false);
-  const [index, setIndex] = useState(-1);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const handleClickOpen = (title: string, id: string, index: number) => {
+  const handleClickOpen = (title: string, id: string) => {
     setTitle(title);
-    setIndex(index);
     setId(id);
     setOpen(true);
   };
@@ -80,6 +80,30 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
       elevation={1}
       sx={{ width: "100%", overflowX: "auto" }}
     >
+      <Alert
+        severity="success"
+        action={
+          <IconButton
+            aria-label="close"
+            color="inherit"
+            size="small"
+            onClick={() => setDisplayAlert(false)}
+          >
+            <CloseIcon fontSize="inherit" />
+          </IconButton>
+        }
+        sx={{
+          position: "fixed",
+          bottom: "20px",
+          left: displayAlert ? "20px" : "-300px",
+          zIndex: "3000",
+          transition: "left 1s ease-in-out, opacity 1s ease-in-out",
+          opacity: displayAlert ? 1 : 0,
+          pointerEvents: displayAlert ? "auto" : "none",
+        }}
+      >
+        Uspješno ste izbrisali novost
+      </Alert>
       <Table
         sx={{ minWidth: 700, width: "100%", display: "block" }}
         aria-label="customized table"
@@ -138,7 +162,7 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
               <StyledTableCell
                 align="right"
                 onClick={() => {
-                  handleClickOpen(row.title, row.id, index);
+                  handleClickOpen(row.title, row.id);
                 }}
               >
                 <DeleteIcon />
@@ -163,10 +187,10 @@ const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            NE
+            OTKAŽI
           </Button>
           <Button onClick={() => handleDelete()} color="error">
-            DA
+            IZBRIŠI
           </Button>
         </DialogActions>
       </Dialog>

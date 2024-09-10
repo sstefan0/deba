@@ -10,7 +10,7 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { LatLng, LatLngExpression } from "leaflet";
+import { LatLng } from "leaflet";
 import callApi from "../../api/api";
 
 type Inputs = {
@@ -78,6 +78,8 @@ export default function SpotForm(props: any) {
             <Grid xs={12}>
               <TextField
                 label="Naziv"
+                error={Boolean(errors.name)}
+                helperText={errors.name ? "Ovo polje je obavezno" : ""}
                 fullWidth
                 {...register("name", { required: true })}
               />
@@ -87,6 +89,8 @@ export default function SpotForm(props: any) {
                 label="Tip"
                 select
                 fullWidth
+                error={Boolean(errors.type)}
+                helperText={errors.type ? "Ovo polje je obavezno" : ""}
                 defaultValue={props.data ? props.data.type : ""}
                 {...register("type", { required: true })}
               >
@@ -102,6 +106,8 @@ export default function SpotForm(props: any) {
             <Grid xs={12}>
               <TextField
                 label="Veb sajt"
+                error={Boolean(errors.website)}
+                helperText={errors.website ? "Ovo polje je obavezno" : ""}
                 fullWidth
                 {...register("website", { required: false })}
               />
@@ -113,6 +119,8 @@ export default function SpotForm(props: any) {
                 label="Opis"
                 fullWidth
                 multiline
+                error={Boolean(errors.description)}
+                helperText={errors.description ? "Ovo polje je obavezno" : ""}
                 minRows={8}
                 maxRows={10}
                 {...register("description", { required: true })}
@@ -125,7 +133,14 @@ export default function SpotForm(props: any) {
                 sx={{ display: "none" }}
                 {...register("location", { required: true })}
               />
-              <Paper square={false} elevation={1} sx={{ width: "100%" }}>
+              <Paper
+                square={false}
+                elevation={1}
+                sx={{
+                  width: "100%",
+                  border: errors.location ? "3px solid #f44336" : "none",
+                }}
+              >
                 <MapContainer
                   center={
                     getValues("location")
@@ -148,6 +163,16 @@ export default function SpotForm(props: any) {
                   )}
                 </MapContainer>
               </Paper>
+              {errors.location && (
+                <Typography
+                  variant="caption"
+                  color={"#f44336"}
+                  fontWeight={400}
+                  fontSize={"0.75rem"}
+                >
+                  Označite lokaciju
+                </Typography>
+              )}
             </Grid>
           </Grid>
           {errors.location && <span>This field is required</span>}

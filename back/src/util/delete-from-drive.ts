@@ -8,9 +8,6 @@ export async function deleteImageFromGoogleDrive(fileId: string, auth: any) {
       fileId,
       auth,
     });
-    console.log(
-      `File with ID ${fileId} deleted successfully from Google Drive.`
-    );
   } catch (error) {
     console.error(`Error deleting file from Google Drive:`, error);
     throw new Error("Failed to delete file from Google Drive.");

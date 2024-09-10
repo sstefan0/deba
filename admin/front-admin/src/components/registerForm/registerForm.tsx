@@ -1,7 +1,6 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
@@ -40,6 +39,8 @@ const RegisterForm = (props: any) => {
               <TextField
                 label="Ime"
                 fullWidth
+                error={Boolean(errors.firstName)}
+                helperText={errors.firstName ? "Ovo polje je obavezno" : ""}
                 {...register("firstName", { required: true })}
               />
             </Grid>
@@ -47,6 +48,8 @@ const RegisterForm = (props: any) => {
               <TextField
                 label="Prezime"
                 fullWidth
+                error={Boolean(errors.lastName)}
+                helperText={errors.lastName ? "Ovo polje je obavezno" : ""}
                 {...register("lastName", { required: true })}
               />
             </Grid>
@@ -56,6 +59,8 @@ const RegisterForm = (props: any) => {
               <TextField
                 label="Email"
                 type="email"
+                error={Boolean(errors.email)}
+                helperText={errors.email ? "Ovo polje je obavezno" : ""}
                 fullWidth
                 {...register("email", { required: true })}
               />
@@ -64,8 +69,10 @@ const RegisterForm = (props: any) => {
               <TextField
                 label="Lozinka"
                 type="password"
+                error={Boolean(errors.password)}
+                helperText={errors.password ? "Ovo polje je obavezno" : ""}
                 fullWidth
-                {...register("password", { required: props.data })}
+                {...register("password", { required: !props.data })}
               />
             </Grid>
             <Grid xs={12} justifyContent={"flex-start"}>
@@ -75,7 +82,9 @@ const RegisterForm = (props: any) => {
                 fullWidth
                 disabled={props.data && userRole === "USER"}
                 defaultValue={props.data ? props.data.role : ""}
-                {...register("role", {})}
+                error={Boolean(errors.role)}
+                helperText={errors.role ? "Ovo polje je obavezno" : ""}
+                {...register("role", { required: true })}
               >
                 <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
                 <MenuItem value={"USER"}>KORISNIK</MenuItem>

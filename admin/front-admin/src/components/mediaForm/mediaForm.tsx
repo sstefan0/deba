@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import {
   Box,
@@ -15,6 +15,12 @@ import {
   DialogContent,
   DialogActions,
   CircularProgress,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  FormLabel,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -23,6 +29,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Grid from "@mui/material/Unstable_Grid2";
 import callApi from "../../api/api";
+import FolderIcon from "@mui/icons-material/FileCopy";
 
 type Inputs = {
   image: FileList;
@@ -34,7 +41,6 @@ export default function MediaForm(props: any) {
     register,
     handleSubmit,
     control,
-    setValue,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: { videoUrls: props.data?.videoUrls },
@@ -45,24 +51,33 @@ export default function MediaForm(props: any) {
     name: "videoUrls",
   });
 
-  // useEffect(() => {
-  //   props.data.videoUrls.forEach((element: any) => {
-  //     append(element.videoURL);
-  //   });
-  // }, []);
   const [loadedImages, setLoadedImages] = useState(
     props.data ? props.data.image : null
   );
+  const [loadedDocs, setLoadedDocs] = useState(
+    props.data ? props.data.docs : null
+  );
+  const [docIndex, setDocIndex] = useState(-1);
   const [imageOpen, setImageOpen] = useState(false); // State to control image dropdown
+  const [docsOpen, setDocsOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<string | null>(null);
+  const [docToDelete, setDocToDelete] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
+
   const handleDeleteImage = (imageId: string, index: number) => {
     setImageToDelete(imageId);
     setImageIndex(index);
     setDeleteDialogOpen(true);
   };
+
+  const handleDeleteDoc = (docId: string, index: number) => {
+    setDocToDelete(docId);
+    setDocIndex(index);
+    setDeleteDialogOpen(true);
+  };
+
   const handleCloseDialog = () => {
     setDeleteDialogOpen(false);
     setImageToDelete(null);
@@ -72,7 +87,7 @@ export default function MediaForm(props: any) {
     if (imageToDelete) {
       try {
         setLoading(true);
-        const response = await callApi.Upload.deleteImage(imageToDelete);
+        await callApi.Upload.deleteImage(imageToDelete);
         setDeleteDialogOpen(false);
         setImageToDelete(null);
         const newArray = loadedImages;
@@ -86,47 +101,36 @@ export default function MediaForm(props: any) {
       }
     }
   };
-  // if (props.data)
-  //   useEffect(() => {
-  //     setLoadedImages(new Array(props.data.image.length).fill(false));
 
-  //     if (props.data?.videoUrls) {
-  //       props.data.videoUrls.forEach((videoUrl: any) => append(videoUrl));
-  //     }
-  //   }, [props.data, append, setValue]);
+  const confirmDeleteDocument = async () => {
+    if (docToDelete) {
+      try {
+        setLoading(true);
+        await callApi.Upload.deleteFile(docToDelete);
+        setDeleteDialogOpen(false);
+        setDocToDelete(null);
+        const newArray = loadedDocs;
+        newArray.splice(docIndex, 1);
+        setLoadedDocs(newArray);
+        setDocIndex(-1);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    }
+  };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     props.submitHandler(data);
   };
+  const validateFiles = (files: any) => {
+    const hasImage = Array.from(files).some((file: any) =>
+      file.type.startsWith("image/")
+    );
+    return hasImage || Boolean(props.data);
+  };
 
-  // const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  // if (props.data)
-  //   useEffect(() => {
-  //     const observer = new IntersectionObserver(
-  //       (entries) => {
-  //         entries.forEach((entry) => {
-  //           if (entry.isIntersecting) {
-  //             const index = parseInt(entry.target.getAttribute("data-index")!);
-  //             setLoadedImages((prev) => {
-  //               const newLoadedImages = [...prev];
-  //               newLoadedImages[index] = true;
-  //               return newLoadedImages;
-  //             });
-  //             observer.unobserve(entry.target);
-  //           }
-  //         });
-  //       },
-  //       {
-  //         rootMargin: "100px",
-  //       }
-  //     );
-
-  //     imageRefs.current.forEach((img) => img && observer.observe(img));
-
-  //     return () => observer.disconnect();
-  //   }, [props.data.image]);
-  console.log(props.data);
-  console.log(fields);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
       <Box sx={{ flexGrow: 1, width: "100%", padding: "1rem" }}>
@@ -147,10 +151,10 @@ export default function MediaForm(props: any) {
           >
             3
           </span>
-          Fotografije i video snimci
+          Fotografije, PDF i video snimci
         </Typography>
 
-        {props.data.image.length > 0 && (
+        {props.data && props.data.image.length > 0 && (
           <Box sx={{ marginBottom: 2 }}>
             <Button
               variant="outlined"
@@ -209,27 +213,88 @@ export default function MediaForm(props: any) {
             </Collapse>
           </Box>
         )}
+        {props.data && props.data.docs.length > 0 && (
+          <>
+            <Button
+              variant="outlined"
+              onClick={() => setDocsOpen(!docsOpen)}
+              endIcon={docsOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              fullWidth
+            >
+              {imageOpen ? "Sakrij pdf datoteke" : "Prikaži pdf datoteke"}
+            </Button>
+            <Collapse in={docsOpen}>
+              <Box
+                sx={{
+                  maxHeight: 200,
+                  overflowY: "auto",
+                  marginBottom: 2,
+                  marginTop: 2,
+                }}
+              >
+                <List dense={false}>
+                  {props.data.docs.map((doc: any, index: number) => (
+                    <ListItem
+                      secondaryAction={
+                        <IconButton
+                          onClick={() => handleDeleteDoc(doc.id, index)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+                    >
+                      <ListItemAvatar>
+                        <Avatar>
+                          <FolderIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={doc.name} secondary={"PDF"} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Collapse>
+          </>
+        )}
 
-        {/* File Upload */}
         <Grid container spacing={1}>
           <Grid xs={12}>
+            <FormLabel
+              sx={{ textAlign: "left", width: "100%", display: "block" }}
+            >
+              Fotografije i PDF
+            </FormLabel>
             <TextField
               type="file"
-              inputProps={{ accept: "image/*", multiple: true }}
-              {...register("image", { required: !props.data })}
+              error={Boolean(errors.image)}
+              helperText={
+                errors.image ? "Dodajte najmanje jednu fotografiju" : ""
+              }
+              inputProps={{
+                accept: "image/*, application/pdf",
+                multiple: true,
+              }}
+              {...register("image", { validate: validateFiles })}
               fullWidth
               sx={{ marginBottom: 2 }}
             />
-            {errors.image && <span>This field is required</span>}
+            {errors.image && (
+              <span>Morate dodati najmanje jednu fotografiju</span>
+            )}
           </Grid>
 
-          {/* Dynamically add YouTube video URLs */}
           {fields.map((field, index) => {
             return (
               <Grid container xs={12} key={field.id} alignItems="center">
                 <Grid xs={10}>
                   <TextField
                     label={`YouTube Video URL ${index + 1}`}
+                    error={!!errors.videoUrls?.[index]?.url}
+                    helperText={
+                      !!errors.videoUrls?.[index]?.url
+                        ? "Ovo polje je obavezno"
+                        : ""
+                    }
                     {...register(`videoUrls.${index}.url`, {
                       required: true,
                     })}
@@ -243,9 +308,6 @@ export default function MediaForm(props: any) {
                         : ""
                     }
                   />
-                  {errors.videoUrls?.[index]?.url && (
-                    <span>This field is required</span>
-                  )}
                 </Grid>
                 <Grid xs={2} sx={{ textAlign: "center" }}>
                   <IconButton
@@ -260,7 +322,6 @@ export default function MediaForm(props: any) {
             );
           })}
 
-          {/* Add Another Video Button */}
           <Grid xs={12}>
             <Button
               variant="outlined"
@@ -272,7 +333,6 @@ export default function MediaForm(props: any) {
             </Button>
           </Grid>
 
-          {/* Navigation Buttons */}
           <Grid xs={6}>
             <Button
               variant="contained"
@@ -299,14 +359,19 @@ export default function MediaForm(props: any) {
         <DialogTitle id="confirm-delete-dialog">Potvrda brisanja</DialogTitle>
         <DialogContent>
           <DialogContentText id="confirm-delete-description">
-            Da li ste sigurni da želite obrisati ovu sliku?
+            Da li ste sigurni da želite obrisati ovu{" "}
+            {imageToDelete ? "fotografiju" : "datoteku"}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
             Otkaži
           </Button>
-          <Button onClick={confirmDeleteImage} color="error" autoFocus>
+          <Button
+            onClick={imageToDelete ? confirmDeleteImage : confirmDeleteDocument}
+            color="error"
+            autoFocus
+          >
             {loading ? (
               <CircularProgress
                 size={24}

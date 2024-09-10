@@ -50,6 +50,7 @@ const EditSpotPage = () => {
       setStep(2);
     }
   }, [routeEnabled]);
+  console.log(defaultData);
 
   useEffect(() => {
     switch (step) {
@@ -102,6 +103,7 @@ const EditSpotPage = () => {
   const step3Data = {
     image: defaultData.Image,
     videoUrls: defaultData.VideoMaterials,
+    docs: defaultData.Document,
   };
   const submit = async (formData: any) => {
     setIsLoading(true);
@@ -144,19 +146,30 @@ const EditSpotPage = () => {
 
     if (formData.image.length > 0) {
       const imagesData = new FormData();
+      const otherData = new FormData();
       Array.from(formData.image).forEach((img: any) => {
-        imagesData.append("images", img);
+        console.log(img);
+        if (img.type.startsWith("image/")) imagesData.append("images", img);
+        else if (img.type === "application/pdf") otherData.append("docs", img);
       });
       imagesData.append("tourismPotentialId", defaultData.id);
-      const images = await callApi.Upload.uploadImages(imagesData);
+      otherData.append("tourismPotentialId", defaultData.id);
+      const promises: any[] = [];
+
+      if (imagesData.has("images"))
+        promises.push(callApi.Upload.uploadImages(imagesData));
+      if (otherData.has("docs"))
+        promises.push(callApi.Upload.uploadFiles(otherData));
+
+      await Promise.all(promises);
     }
     setIsLoading(false);
     setIsSuccess(true);
   };
 
-  const prevStep = (formData: any) => {
+  const prevStep = () => {
     if (step === 3 && !routeEnabled) {
-      setStep(1); // Automatically skip to step 1 if the route step is disabled
+      setStep(1);
     } else {
       setStep(step - 1);
     }
@@ -343,7 +356,7 @@ const EditSpotPage = () => {
             >
               3
             </span>
-            Fotografije i video snimci
+            Fotografije, PDF i video snimci
           </Typography>
         )}
       </div>

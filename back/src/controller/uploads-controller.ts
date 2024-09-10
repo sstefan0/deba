@@ -9,6 +9,7 @@ import { generateDownloadUrl } from "../util/generate-download-url";
 import { IdQueryDto } from "../dto/tourist-spot-dto";
 import { OAuth2Client } from "google-auth-library";
 import { deleteImageFromGoogleDrive } from "../util/delete-from-drive";
+import HttpException from "../util/http-exception";
 
 export const uploadImageController = async (
   req: Request,
@@ -17,7 +18,6 @@ export const uploadImageController = async (
 ) => {
   try {
     const imageURLs = (await Promise.all(req.promises)).map((response) => {
-      console.log(response.data);
       return { imageURL: generateImageUrl(response.id!), ...req.body };
     });
     const resImages = await prisma.image.createMany({ data: imageURLs });
@@ -34,7 +34,6 @@ export const uploadFilesController = async (
 ) => {
   try {
     const fileURLs = (await Promise.all(req.promises)).map((response) => {
-      console.log("resiponsiii", response);
       return {
         docURL: generateDownloadUrl(response.id!),
         ...req.body,
@@ -48,6 +47,29 @@ export const uploadFilesController = async (
   }
 };
 
+export const deleteDocumentController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const docId = (req.query as unknown as IdQueryDto).id;
+
+    const document = await prisma.document.findFirst({ where: { id: docId } });
+    if (!document) throw new HttpException(404, "File not found");
+    const auth = getGoogleDriveAuth();
+    const fileId = document.docURL.split("&id=")[1];
+
+    await deleteImageFromGoogleDrive(fileId as unknown as string, auth);
+
+    const deletedFile = await prisma.document.delete({ where: { id: docId } });
+
+    res.status(200).json(deletedFile);
+  } catch (e) {
+    next(e);
+  }
+};
+
 export const deleteImageController = async (
   req: Request,
   res: Response,
@@ -55,23 +77,15 @@ export const deleteImageController = async (
 ) => {
   try {
     const imageId = (req.query as unknown as IdQueryDto).id;
-    console.log("imageid" + imageId);
-    // Fetch the image record to get the Google Drive file ID
 
     const image = await prisma.image.findFirst({ where: { id: imageId } });
-    console.log("slika iz baze" + image?.imageURL);
     if (!image) {
       return res.status(404).json({ message: "Image not found" });
     }
 
-    // Delete the image from the database
-
-    // Delete the image from Google Drive
     const auth = getGoogleDriveAuth();
     const imageDriveId = image.imageURL.split("?id=")[1];
-    console.log("imaaageeee", imageDriveId);
     const imageDriveIdFinal = imageDriveId.split("&")[0];
-    // console.log("imedzzzzz", imageDriveIdFinal);
     await deleteImageFromGoogleDrive(
       imageDriveIdFinal as unknown as string,
       auth

@@ -1,6 +1,4 @@
 import { Role } from "@prisma/client";
-import { query } from "express";
-import { PassThrough } from "stream";
 import * as yup from "yup";
 
 export const loginSchema = yup.object({

@@ -18,11 +18,7 @@ const googleMiddleware =
         "https://developers.google.com/oauthplayground"
       );
       new OAuth2({});
-      //   console.log("reqqqq", req);
-      console.log("fajloviii", req.files);
       oauth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-
-      console.log("bodiii", req.body);
 
       const drive = google.drive({
         version: "v3",

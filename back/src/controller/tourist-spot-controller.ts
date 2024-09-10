@@ -111,7 +111,7 @@ export const getAllSpotsController = async (
       name: spot.name,
       type: spot.type.name,
       color: spot.type.color,
-      image: spot.Image[0].imageURL,
+      image: spot.Image[0]?.imageURL,
       description: spot.description,
       lat: spot.lat,
       lon: spot.lon,
@@ -145,7 +145,6 @@ export const getSpotsTableController = async (
   try {
     let spots;
     if (req.user.role === "ADMIN") {
-      console.log("admineeee");
       spots = await prisma.tourismPotential.findMany({
         include: { type: true, user: true },
         orderBy: { name: "asc" },
@@ -337,8 +336,7 @@ export const getRecommendationsController = async (
       obj[types[index].name] = value;
       return obj;
     }, {});
-    console.log(promises);
-    console.log(response);
+
     res.status(200).json(formattedResponse);
   } catch (e) {
     next(e);

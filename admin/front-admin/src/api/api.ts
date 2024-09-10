@@ -78,6 +78,10 @@ const Upload = {
     imageApi.post("/upload/images", image).then(responseBody),
   deleteImage: (imageId: string) =>
     requests.deleteOne(`/upload/deleteImage?id=${imageId}`),
+  uploadFiles: (file: any) =>
+    imageApi.post("/upload/files", file).then(responseBody),
+  deleteFile: (fileId: string) =>
+    requests.deleteOne(`/upload/deleteFile?id=${fileId}`),
 };
 
 const Auth = {

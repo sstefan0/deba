@@ -1,5 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {
   MapContainer,
@@ -10,6 +17,7 @@ import {
 } from "react-leaflet";
 import { useState } from "react";
 import { LatLng } from "leaflet";
+import UndoIcon from "@mui/icons-material/Undo";
 
 type Inputs = {
   location: LatLng[]; // Stores the polyline coordinates
@@ -20,7 +28,6 @@ export default function RouteForm(props: any) {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<Inputs>({ defaultValues: props.data });
   const onSubmit: SubmitHandler<Inputs> = (data) => props.nextHandler(data);
@@ -86,7 +93,14 @@ export default function RouteForm(props: any) {
                 sx={{ display: "none" }}
                 {...register("location", { required: true })}
               />
-              <Paper square={false} elevation={1} sx={{ width: "100%" }}>
+              <Paper
+                square={false}
+                elevation={1}
+                sx={{
+                  width: "100%",
+                  border: errors.location ? "3px solid #f44336" : "none",
+                }}
+              >
                 <MapContainer
                   center={[43.782416968212864, 19.288123754582692]}
                   zoom={15}
@@ -106,29 +120,33 @@ export default function RouteForm(props: any) {
                   )}
                 </MapContainer>
               </Paper>
+              {errors.location && (
+                <Typography
+                  variant="caption"
+                  color={"#f44336"}
+                  fontWeight={400}
+                  fontSize={"0.75rem"}
+                >
+                  Označite rutu
+                </Typography>
+              )}
             </Grid>
           </Grid>
-          {errors.location && <span>This field is required</span>}
 
           <Grid xs={6} container>
             <Grid xs={6}>
-              <Button
-                variant="outlined"
-                fullWidth
-                onClick={props.prevHandler} // Call the previous step handler
-              >
+              <Button variant="outlined" fullWidth onClick={props.prevHandler}>
                 Nazad
               </Button>
             </Grid>
             <Grid xs={6}>
-              <Button
-                variant="outlined"
-                fullWidth
-                onClick={undoLastPoint} // Call the undo last point function
-                disabled={positions.length === 0} // Disable if there are no points
+              <IconButton
+                onClick={undoLastPoint}
+                disabled={positions.length === 0}
+                color="error"
               >
-                Poništi prethodnu tačku
-              </Button>
+                <UndoIcon />
+              </IconButton>
             </Grid>
           </Grid>
           <Grid xs={6}>

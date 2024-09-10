@@ -31,7 +31,6 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 const CustomizedTables = ({ data }: { data: TouristSpotData[] }) => {
   const navigate = useNavigate();
-  // Object.keys()
 
   return data && data.length > 0 ? (
     <Paper

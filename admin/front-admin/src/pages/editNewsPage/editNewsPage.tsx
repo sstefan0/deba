@@ -35,14 +35,23 @@ const EditNewsPage = () => {
 
       if (data.images.length > 0) {
         const formData = new FormData();
+        const otherFiles = new FormData();
         Array.from(data.images).forEach((img: any) => {
-          formData.append("images", img);
+          if (img.type.startsWith("image/")) formData.append("images", img);
+          else if (img.type === "application/pdf")
+            otherFiles.append("docs", img);
         });
         formData.append("newsArticleId", newArticle.id);
-        await callApi.Upload.uploadImages(formData);
+        otherFiles.append("newsArticleId", newArticle.id);
+        const promises: any[] = [];
+        if (formData.has("images"))
+          promises.push(callApi.Upload.uploadImages(formData));
+        if (otherFiles.has("docs"))
+          promises.push(callApi.Upload.uploadFiles(otherFiles));
+
+        await Promise.all(promises);
       }
 
-      // Set success state
       setIsLoading(false);
       setIsSuccess(true);
     } catch (error) {

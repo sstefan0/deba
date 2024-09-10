@@ -10,21 +10,19 @@ const MainArticle = (props: any) => {
       spacing={3}
       sx={{ position: "relative", justifyContent: "center" }}
     >
-      {/* Image as background */}
       <Grid xs={12} style={{ height: "100%" }}>
         <div
           style={{
             width: "100%",
-            height: "100%", // Ensure the container takes full height of its parent
-            overflow: "hidden", // Hide any overflowed content
+            height: "100%",
+            overflow: "hidden",
           }}
         >
           <img
             src={props.article.imageUrl || "/novosti.jpg"}
             style={{
               width: "100%",
-              //   height: "100%", // Make the image fill the container
-              objectFit: "cover", // Cover the container while maintaining aspect ratio
+              objectFit: "cover",
               borderRadius: "10px",
             }}
             alt="slikica"
@@ -32,25 +30,21 @@ const MainArticle = (props: any) => {
         </div>
       </Grid>
 
-      {/* Overlay Card */}
-
       <Box
         component={Paper}
         elevation={3}
         sx={{
           position: "absolute",
-          top: "50%", // Position at the center of the image height
-          left: { xs: "50%", md: "20%" }, // Center the overlay horizontally
-          transform: "translate(-50%, -50%)", // Adjust for centering the box
-          width: { xs: "100%", md: "40%" }, // Ensure the width doesn't exceed the image
-          //   maxWidth: "90%", // Also set a max-width constraint
-          maxHeight: "100%", // Ensure the height doesn't overflow the image
+          top: "50%",
+          left: { xs: "50%", md: "20%" },
+          transform: "translate(-50%, -50%)",
+          width: { xs: "100%", md: "40%" },
+          maxHeight: "100%",
           padding: "20px",
           borderRadius: "10px",
-          backgroundColor: "rgba(0, 0, 0, 0.8)", // Make it slightly transparent
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
         }}
       >
-        {/* News Title */}
         <Typography
           variant="h5"
           textAlign={"left"}
@@ -60,7 +54,6 @@ const MainArticle = (props: any) => {
           {props.article.title}
         </Typography>
 
-        {/* Date */}
         <Typography
           variant="subtitle2"
           color={"grey"}
@@ -70,7 +63,6 @@ const MainArticle = (props: any) => {
           {new Date(props.article.createdAt).toLocaleDateString("en-UK")}
         </Typography>
 
-        {/* Article Excerpt */}
         <Typography
           variant="body2"
           textAlign="left"
@@ -79,7 +71,6 @@ const MainArticle = (props: any) => {
           {props.article.description.substring(0, 100)}...
         </Typography>
 
-        {/* Read More */}
         <Link to={`/novost/${props.article.id}`}>
           <Typography
             variant="body2"

@@ -155,7 +155,7 @@ export const getArticleByIdController = async (
     const articleId = (req.query as unknown as IdQueryDto).id;
     const newsArticle = await prisma.newsArticle.findFirst({
       where: { id: articleId },
-      include: { Image: true },
+      include: { Image: true, Document: true },
     });
     if (!newsArticle) throw new HttpException(404, "Article not found");
 
