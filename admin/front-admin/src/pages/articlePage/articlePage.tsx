@@ -77,14 +77,13 @@ const ArticlePage = () => {
               sx={{
                 padding: "3rem 4rem",
                 borderRadius: "25px",
-                // backgroundColor: "#fff",
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
                 position: "relative",
-                top: "-50px", // Adjust this value as needed
-                width: "calc(100% - 20px)", // Adjust based on padding
-                margin: "0 auto", // Center align the Paper
+                top: "-50px",
+                width: "calc(100% - 20px)",
+                margin: "0 auto",
                 boxSizing: "border-box",
-                zIndex: 1, // Ensure it sits above the image
+                zIndex: 1,
               }}
             >
               <div
@@ -117,7 +116,6 @@ const ArticlePage = () => {
                       sx={{
                         "&:focus": { outline: "none" },
                         "&:hover": {
-                          // color: loaderData.type.color,
                           background: "none",
                         },
                       }}
@@ -178,22 +176,12 @@ const ArticlePage = () => {
             </Typography>
             {latestNews.map((article: any) => {
               if (article.id !== loaderData.id)
-                return <NewsArticleCard article={article} />;
+                return <NewsArticleCard article={article} key={article.id} />;
             })}
           </Paper>
         </Grid>
       </Grid>
-      <Box sx={{ flexGrow: 1, marginTop: "20px" }}>
-        <Grid container spacing={3}>
-          {/* Adjust this section based on your needs */}
-          <Grid xs={12} sm={8}>
-            {/* Content goes here */}
-          </Grid>
-          <Grid xs={12} sm={4}>
-            {/* Content goes here */}
-          </Grid>
-        </Grid>
-      </Box>
+
       <link
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet"

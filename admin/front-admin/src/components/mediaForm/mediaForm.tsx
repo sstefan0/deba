@@ -58,7 +58,7 @@ export default function MediaForm(props: any) {
     props.data ? props.data.docs : null
   );
   const [docIndex, setDocIndex] = useState(-1);
-  const [imageOpen, setImageOpen] = useState(false); // State to control image dropdown
+  const [imageOpen, setImageOpen] = useState(false);
   const [docsOpen, setDocsOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<string | null>(null);

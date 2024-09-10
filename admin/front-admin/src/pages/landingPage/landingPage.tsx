@@ -34,7 +34,7 @@ const sections = [
     title: "Istražite Višegrad",
     subtitle: "VAŠA PUSTOLOVINA ČEKA",
     description: `Višegrad je grad bogat istorijom, kulturom i prirodnim ljepotama, pružajući vam nezaboravno iskustvo. Od veličanstvenog Mosta Mehmed Paše Sokolovića do kulturnog kompleksa Andrićgrad i opuštanja u Višegradskoj Banji, svaki kutak ovog grada priča svoju jedinstvenu priču. Ne propustite priliku da istražite sve što Višegrad nudi i stvorite svoja vlastita nezaboravna sjećanja.`,
-    bgImage: "url(visegrad.jpg)", // Zamenite sa pravim URL-om slike
+    bgImage: "url(visegrad.jpg)",
     url: "/map",
   },
 ];
@@ -65,6 +65,7 @@ const HomePage: React.FC = () => {
     >
       {sections.map((section, index) => (
         <Box
+          key={index}
           sx={{
             scrollSnapAlign: "start",
             scrollBehavior: "smooth",

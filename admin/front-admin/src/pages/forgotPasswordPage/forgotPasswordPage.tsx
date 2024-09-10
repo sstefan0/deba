@@ -63,13 +63,19 @@ const ForgotPasswordPage = () => {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const response = await callApi.Auth.forgotPassword({ email });
-      if (response) {
+      if (email.length === 0) {
         setIsLoading(false);
-        setIsSuccess(true);
+        setError("Unesite email");
+      } else {
+        const response = await callApi.Auth.forgotPassword({ email });
+
+        if (response) {
+          setIsLoading(false);
+          setIsSuccess(true);
+        }
       }
     } catch (e) {
-      setError("Pogrešan email ili lozinka");
+      setError("Pogrešan email");
       setIsLoading(false);
     }
   };

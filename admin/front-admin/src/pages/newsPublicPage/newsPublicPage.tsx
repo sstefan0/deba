@@ -83,7 +83,7 @@ const NewsPublicPage = () => {
         </Typography>
         <Grid container spacing={3} width={"100%"}>
           {displayData.slice(7, end).map((article: any) => (
-            <Grid sm={12} md={4}>
+            <Grid sm={12} md={4} key={article.id}>
               <NewsCard article={article} />
             </Grid>
           ))}

@@ -62,8 +62,6 @@ export const getNewsAdminController = async (
     const reqData = req.query as unknown as GetNewsDto;
     const limit: number = parseInt(reqData.limit as unknown as string);
     const page: number = parseInt(reqData.page as unknown as string);
-    console.log(reqData);
-    console.log(limit, page);
     let news;
     if (req.user.role === "ADMIN") {
       news = await prisma.newsArticle.findMany({

@@ -20,7 +20,7 @@ import { LatLng } from "leaflet";
 import UndoIcon from "@mui/icons-material/Undo";
 
 type Inputs = {
-  location: LatLng[]; // Stores the polyline coordinates
+  location: LatLng[];
 };
 
 export default function RouteForm(props: any) {

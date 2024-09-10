@@ -50,7 +50,6 @@ const EditSpotPage = () => {
       setStep(2);
     }
   }, [routeEnabled]);
-  console.log(defaultData);
 
   useEffect(() => {
     switch (step) {
@@ -83,9 +82,8 @@ const EditSpotPage = () => {
       return newData;
     });
 
-    // Move to the next step
     if (step === 1 && !routeEnabled) {
-      setStep(3); // Automatically skip to step 3 if the route step is disabled
+      setStep(3);
     } else {
       setStep(step + 1);
     }
@@ -115,10 +113,7 @@ const EditSpotPage = () => {
       lat: data[0].location.lat,
       lon: data[0].location.lng,
     };
-    const newSpot = await callApi.TouristSpots.updateSpot(
-      defaultData.id,
-      formattedData
-    );
+    await callApi.TouristSpots.updateSpot(defaultData.id, formattedData);
     await callApi.TouristSpots.deletePath(defaultData.id);
 
     if (routeEnabled) {
@@ -131,7 +126,7 @@ const EditSpotPage = () => {
           };
         }),
       };
-      const path = await callApi.TouristSpots.addPath(reqBody);
+      await callApi.TouristSpots.addPath(reqBody);
     }
     await callApi.TouristSpots.deleteVideos(defaultData.id);
     if (formData.videoUrls.length > 0) {
@@ -141,14 +136,13 @@ const EditSpotPage = () => {
           return videoUrl.url;
         }),
       };
-      const videos = await callApi.TouristSpots.addVideos(reqBody);
+      await callApi.TouristSpots.addVideos(reqBody);
     }
 
     if (formData.image.length > 0) {
       const imagesData = new FormData();
       const otherData = new FormData();
       Array.from(formData.image).forEach((img: any) => {
-        console.log(img);
         if (img.type.startsWith("image/")) imagesData.append("images", img);
         else if (img.type === "application/pdf") otherData.append("docs", img);
       });

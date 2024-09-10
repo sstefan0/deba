@@ -175,7 +175,6 @@ export default function SpotForm(props: any) {
               )}
             </Grid>
           </Grid>
-          {errors.location && <span>This field is required</span>}
           <Grid xs={12}>
             <Button type="submit" variant="contained" fullWidth>
               Dalje
