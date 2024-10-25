@@ -32,6 +32,7 @@ import NewsPublicPage from "./pages/newsPublicPage/newsPublicPage.tsx";
 import LandingPage from "./pages/landingPage/landingPage.tsx";
 import PublicAppBar from "./components/publicAppBar/publicAppBar.tsx";
 import AnalyticsPage from "./pages/analyticsPage/analyticsPage.tsx";
+import ProfileInfo from "./pages/profileInfo/profileInfo.tsx";
 let theme = createTheme({
   palette: {
     mode: "dark",
@@ -128,7 +129,7 @@ const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/forgotPassword", element: <ForgotPasswordPage /> },
   { path: "/resetPassword/:token", element: <ResetPasswordPage /> },
-
+  { path: "/profileInfo", element: <ProfileInfo /> },
   {
     path: "/home",
     element: <LandingPage />,

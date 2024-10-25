@@ -4,6 +4,15 @@ const baseURL = "http://localhost:3000/api";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
+const openWeatherApi: AxiosInstance = axios.create();
+
+const pollutionApi = () => {
+  openWeatherApi
+    .get(
+      "http://api.openweathermap.org/data/2.5/air_pollution?lat=43.85889290328584&lon=18.421933896622665&appid=4a1b0fc22bca2ef6e15d17d36e974e12"
+    )
+    .then(responseBody);
+};
 const api: AxiosInstance = axios.create({
   baseURL,
   headers: {
@@ -115,6 +124,7 @@ const callApi = {
   Upload,
   Auth,
   News,
+  pollutionApi,
 };
 
 export default callApi;

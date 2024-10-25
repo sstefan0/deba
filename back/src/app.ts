@@ -8,9 +8,12 @@ import swaggerUi from "swagger-ui-express";
 import touristSpotRouter from "./router/tourist-spot-router";
 import uploadRouter from "./router/uploads-router";
 import newsRouter from "./router/news-router";
+import { initSocket } from "./socket";
+import { createServer } from "http";
 
 const app = express();
 const port = process.env.PORT;
+const server = createServer(app);
 
 app.use(cors());
 app.use(
@@ -24,6 +27,8 @@ app.use(
     credentials: true,
   })
 );
+
+initSocket(server);
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -68,6 +73,6 @@ app.use("/api/news", newsRouter);
 
 app.use(ErrorHandler);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log("server is running on port " + port);
 });
