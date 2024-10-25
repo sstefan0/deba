@@ -20,31 +20,31 @@
   "potentialType": [
     {
       "id": "bb5d4511-b1f6-4e81-b1d7-1702f18843f3",
-      "name": "Prirodna znamenitost",
+      "name": "Prirodne znamenitosti",
       "color": "#32CD32",
       "iconURL": "park.png"
     },
     {
       "id": "468a557a-ef4e-4729-bb4b-37cbe107004e",
-      "name": "Kulturno-istorijska znamenitost",
+      "name": "Kulturno-istorijske znamenitosti",
       "color": "#B71C1C",
       "iconURL": "historica-pin.png"
     },
     {
       "id": "033af66b-dec3-4475-adcb-e846947ea230",
-      "name": "Restoran",
+      "name": "Restorani",
       "color": "#FF9800",
       "iconURL": "restaurant.png"
     },
     {
       "id": "0f0d44c1-ac95-454a-a5c5-58d2c7ab6314",
-      "name": "Biciklistička staza",
+      "name": "Biciklističke staze",
       "color": "#2196F3",
       "iconURL": "bicycle.png"
     },
     {
       "id": "3cc0f693-de40-4362-911c-9a4e675b1cce",
-      "name": "Planinarska staza",
+      "name": "Planinarske staze",
       "color": "#2E7D32",
       "iconURL": "mountain.png"
     }
@@ -57,13 +57,14 @@
       "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
       "potentialTypeId": "468a557a-ef4e-4729-bb4b-37cbe107004e",
       "lat": 43.7824988474958,
-      "lon": 19.2877605482346
+      "lon": 19.2877605482346,
+      "webSite": "https://visegradturizam.com/atrakcije/na-drini-cuprija/"
     },
     {
       "id": "9b1f7d6b-5bda-4f2b-96a2-5f7b5dd2a771",
       "name": "Andrićgrad",
       "description": "Andrićgrad, also known as Kamengrad, is a town dedicated to the Nobel Prize-winning author Ivo Andrić, located near the famous Mehmed Paša Sokolović Bridge. The town was built by renowned filmmaker Emir Kusturica and opened in 2014. The architectural style of Andrićgrad is a mix of different historical periods and styles that have marked the history of Višegrad, from the Ottoman Empire to the Austro-Hungarian period. The town features cobblestone streets, a church, a theatre, a multiplex cinema, a hotel, and a gallery, among other attractions. Visitors can explore the rich cultural heritage of the region and learn more about Andrić's life and work.",
-      "userId": "eee7ddf6-6d77-4f7f-a1a3-9abf22aedc7a",
+      "userId": "d4039b58-bf60-464d-8db3-d164ccef1cfd",
       "potentialTypeId": "468a557a-ef4e-4729-bb4b-37cbe107004e",
       "webSite": "andricgrad.com",
       "lat": 43.78539999085525,

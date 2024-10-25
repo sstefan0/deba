@@ -125,7 +125,7 @@ const ResetPasswordPage = () => {
       <StyledCard>
         <CardContent>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
-            Zaboravljena lozinka
+            Unesite novu lozinku
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
           <Box

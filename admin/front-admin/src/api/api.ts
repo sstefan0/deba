@@ -14,9 +14,22 @@ const imageApi = axios.create({
   baseURL,
   headers: {
     "Content-Type": "multipart:form-data",
-    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    // Authorization: "Bearer " + localStorage.getItem("accessToken"),
   },
 });
+
+imageApi.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 api.interceptors.request.use(
   (config) => {

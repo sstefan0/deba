@@ -31,7 +31,7 @@ const PresentationPage = () => {
   const [typeIcons, setTypeIcons] = useState<any>([]);
   const [types, setTypes] = useState<any>([]);
   const [selectedType, setSelectedType] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(!open);
   const [recommendations, setRecommendations] = useState<any>([]);
   const [center, setCenter] = useState<LatLngExpression>([
@@ -202,6 +202,7 @@ const PresentationPage = () => {
                 borderRadius: "15px",
                 border: "1px solid white",
               }}
+              referrerPolicy="no-referrer"
             ></img>
             <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
               {recommendations[selectedType].name}

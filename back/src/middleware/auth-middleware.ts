@@ -12,7 +12,6 @@ const authorize =
         throw new HttpException(401, "Unauthorized.");
 
       const token = authorizationHeader.replace("Bearer ", "");
-
       if (!token) throw new HttpException(401, "Auth token not found.");
 
       const decoded = jwt.verify(token, (process.env as any).JWT_SECRET);

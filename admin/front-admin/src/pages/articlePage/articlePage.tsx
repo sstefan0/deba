@@ -63,6 +63,7 @@ const ArticlePage = () => {
         <Grid xs={12} md={7}>
           <div style={{ position: "relative" }}>
             <img
+              referrerPolicy="no-referrer"
               src={
                 loaderData.Image[0]
                   ? loaderData.Image[0].imageURL

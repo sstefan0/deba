@@ -19,7 +19,7 @@ const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     textAlign: "center",
-    width: "150px",
+    width: "20%",
   },
 }));
 

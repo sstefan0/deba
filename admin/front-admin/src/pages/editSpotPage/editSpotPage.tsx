@@ -200,7 +200,7 @@ const EditSpotPage = () => {
               variant="h6"
               sx={{ color: "white", marginTop: "16px", fontWeight: "bold" }}
             >
-              Turisticka destinacija uspješno uređena.
+              Turistička destinacija uspješno uređena.
             </Typography>
             <Button
               variant="contained"

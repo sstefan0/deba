@@ -19,6 +19,7 @@ const MainArticle = (props: any) => {
           }}
         >
           <img
+            referrerPolicy="no-referrer"
             src={props.article.imageUrl || "/novosti.jpg"}
             style={{
               width: "100%",

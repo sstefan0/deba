@@ -46,6 +46,7 @@ const ImagesList = (props: any) => {
                 }}
               >
                 <img
+                  referrerPolicy="no-referrer"
                   srcSet={`${item.imageURL}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   src={`${item.imageURL}?w=248&fit=crop&auto=format`}
                   alt={""}
@@ -64,6 +65,7 @@ const ImagesList = (props: any) => {
       >
         <Box sx={style}>
           <img
+            referrerPolicy="no-referrer"
             src={image}
             style={{ maxWidth: "90vw", maxHeight: "90vh" }}
           ></img>

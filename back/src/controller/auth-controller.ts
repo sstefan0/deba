@@ -100,7 +100,7 @@ export const forgotPasswordController = async (
     const mail = await sendEmail({
       from: "turizamvisegrad@gmail.com",
       to: user.email,
-      subject: "test",
+      subject: "Resetovanje lozinke",
       html: generateHTMLResetMessage(user.firstName, resetToken),
     });
     res.status(200).json({ message: "Check your email for further details." });
@@ -201,7 +201,9 @@ export const getAllAccountsController = async (
   next: NextFunction
 ) => {
   try {
-    const userAccounts = await prisma.user.findMany();
+    const userAccounts = await prisma.user.findMany({
+      where: { id: { not: req.user.id } },
+    });
     const formattedResponse = userAccounts.map((user) => ({
       id: user.id,
       firstName: user.firstName,

@@ -1,9 +1,18 @@
 import React from "react";
-import { Box, Typography, Button, keyframes } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  keyframes,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const sections = [
   {
@@ -40,6 +49,15 @@ const sections = [
 ];
 
 const HomePage: React.FC = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const bounce = keyframes`
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -115,6 +133,43 @@ const HomePage: React.FC = () => {
               },
             }}
           >
+            <IconButton
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+              sx={{
+                position: "absolute",
+                top: "1%",
+                right: "1%",
+                zIndex: "10000",
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to={"/map"}
+              >
+                <MenuItem onClick={handleClose}>Mapa</MenuItem>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to={"/sveNovosti/1"}
+              >
+                <MenuItem onClick={handleClose}>Novosti</MenuItem>
+              </Link>
+            </Menu>
             <Grid2
               zIndex={2}
               spacing={1}

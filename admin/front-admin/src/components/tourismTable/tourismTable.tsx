@@ -34,7 +34,7 @@ const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     textAlign: "center",
-    width: "200px",
+    width: "33%",
   },
 }));
 

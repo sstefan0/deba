@@ -189,6 +189,7 @@ const NewsForm = (props: any) => {
                               <ImageListItem key={index}>
                                 {loadedImages[index] ? (
                                   <img
+                                    referrerPolicy="no-referrer"
                                     src={img.imageURL}
                                     alt={`Image ${index + 1}`}
                                     style={{ width: "100%", height: "auto" }}
@@ -270,7 +271,7 @@ const NewsForm = (props: any) => {
                   </Collapse>
                 </>
               )}
-              <InputLabel>Fotografije</InputLabel>
+              <InputLabel>Fotografije i PDF</InputLabel>
               <TextField
                 type="file"
                 error={Boolean(errors.images)}

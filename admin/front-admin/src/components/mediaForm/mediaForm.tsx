@@ -180,6 +180,7 @@ export default function MediaForm(props: any) {
                         <ImageListItem key={index}>
                           {loadedImages[index] ? (
                             <img
+                              referrerPolicy="no-referrer"
                               src={img.imageURL}
                               alt={`Image ${index + 1}`}
                               style={{ width: "100%", height: "auto" }}

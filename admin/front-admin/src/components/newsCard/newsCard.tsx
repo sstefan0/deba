@@ -64,6 +64,7 @@ const NewsCard = (props: any) => {
           }}
         >
           <img
+            referrerPolicy="no-referrer"
             src={props.article.imageUrl || "/novosti.jpg"}
             alt="News"
             style={{

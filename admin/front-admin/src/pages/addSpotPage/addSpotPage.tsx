@@ -183,7 +183,7 @@ const AddSpotPage = () => {
               variant="h6"
               sx={{ color: "white", marginTop: "16px", fontWeight: "bold" }}
             >
-              Destinacija uspješno uređena.
+              Uspješno ste dodali destinaciju.
             </Typography>
             <Button
               variant="contained"
