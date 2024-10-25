@@ -31,6 +31,7 @@ import PresentationPage from "./pages/presentationPage/presentationPage.tsx";
 import NewsPublicPage from "./pages/newsPublicPage/newsPublicPage.tsx";
 import LandingPage from "./pages/landingPage/landingPage.tsx";
 import PublicAppBar from "./components/publicAppBar/publicAppBar.tsx";
+import AnalyticsPage from "./pages/analyticsPage/analyticsPage.tsx";
 let theme = createTheme({
   palette: {
     mode: "dark",
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         path: "turistickaMjesta",
         element: <TouristSpotsPage />,
         loader: touristSpotsLoader,
+      },
+      {
+        path: "analitika",
+        element: <AnalyticsPage />,
       },
       {
         path: "createSpot",

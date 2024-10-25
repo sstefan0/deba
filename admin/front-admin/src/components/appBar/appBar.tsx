@@ -23,13 +23,16 @@ import { useSelector } from "react-redux";
 import callApi from "../../api/api";
 import { RootState } from "../../redux/store";
 import { getAuth } from "../../util/get-auth";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import EventIcon from "@mui/icons-material/Event";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [pageTitle, setPageTitle] = useState("Turistička mjesta");
+  const [pageTitle, setPageTitle] = useState("Događaji");
   const [userName, setUserName] = useState("");
   const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
@@ -70,34 +73,49 @@ export default function ResponsiveDrawer() {
       <div>
         <Toolbar></Toolbar>
         <List>
-          <ListItem key={"Turisticka mjesta"} disablePadding>
+          <ListItem key={"Događaji"} disablePadding>
             <ListItemButton
               component={Link}
               to="turistickaMjesta"
               onClick={() => {
-                setPageTitle("Turistička mjesta");
+                setPageTitle("Događaji");
                 handleDrawerClose();
               }}
             >
               <ListItemIcon>
-                <RoomOutlinedIcon />
+                <EventIcon />
               </ListItemIcon>
-              <ListItemText primary={"Turistička mjesta"} />
+              <ListItemText primary={"Događaji"} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"Novosti"} disablePadding>
+          <ListItem key={"Analitika"} disablePadding>
+            <ListItemButton
+              component={Link}
+              to="analitika"
+              onClick={() => {
+                setPageTitle("Analitika");
+                handleDrawerClose();
+              }}
+            >
+              <ListItemIcon>
+                <QueryStatsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Analitika"} />
+            </ListItemButton>
+          </ListItem>{" "}
+          <ListItem key={"Obavještenja"} disablePadding>
             <ListItemButton
               component={Link}
               to="novosti/1"
               onClick={() => {
-                setPageTitle("Novosti");
+                setPageTitle("Obavještenja");
                 handleDrawerClose();
               }}
             >
               <ListItemIcon>
-                <NewspaperOutlinedIcon />
+                <NotificationsIcon />
               </ListItemIcon>
-              <ListItemText primary={"Novosti"} />
+              <ListItemText primary={"Obavještenja"} />
             </ListItemButton>
           </ListItem>
           {storedRole === "ADMIN" && (

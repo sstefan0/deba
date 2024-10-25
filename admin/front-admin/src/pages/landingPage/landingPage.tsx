@@ -16,35 +16,22 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const sections = [
   {
-    title: "Otkrijte Višegrad",
-    subtitle: "ISTORIJSKI GRAD NA DRINI",
-    description: `Višegrad je grad poznat po svojoj bogatoj istoriji i kulturnom naslijeđu. Smješten na obalama rijeke Drine, nudi jedinstven spoj prirodnih ljepota i istorijskih znamenitosti. Posjetioci mogu uživati u šetnjama pored rijeke, istraživanju lokalnih muzeja i uživanju u autentičnoj bosanskoj kuhinji.`,
-    bgImage: "url(prvaslika.jpeg)",
+    title: "",
+    subtitle: "",
+    description: `Očuvanje životne sredine obuhvata niz aktivnosti i strategija koje pomažu u zaštiti prirodnih resursa i smanjenju negativnih uticaja ljudskih aktivnosti na ekosistem. Ključni ciljevi uključuju smanjenje zagađenja, očuvanje biodiverziteta, odgovorno upravljanje resursima poput vode i energije, kao i smanjenje otpada kroz reciklažu i ponovnu upotrebu. Ove prakse ne samo da doprinose stabilnosti ekosistema, već poboljšavaju kvalitet života ljudi i pomažu u očuvanju planete za buduće generacije.`,
+    bgImage: "url(ekologija1.png)",
   },
   {
-    title: "Most Mehmed Paše Sokolovića",
-    subtitle: "UNESCO SPOMENIK KULTURE",
-    description: `Ovaj veličanstveni most iz 16. vijeka predstavlja remek-djelo osmanske arhitekture. Most Mehmed Paše Sokolovića, djelo čuvenog graditelja Mimara Sinana, danas je pod zaštitom UNESCO-a. Preko rijeke Drine, most povezuje ne samo dvije obale već i bogatu istoriju Višegrada sa svijetom.`,
-    bgImage: "url(drugaslika.jpeg)",
+    title: "",
+    subtitle: "",
+    description: `Zelene površine igraju ključnu ulogu u poboljšanju kvaliteta života u urbanim sredinama, jer pomažu u smanjenju zagađenja vazduha, apsorpciji ugljen-dioksida i regulisanju temperature. One obezbeđuju staništa za raznovrsne biljne i životinjske vrste, podržavajući biodiverzitet i ekološku ravnotežu. Pored ekoloških koristi, zelene površine stvaraju prostor za rekreaciju i opuštanje, što pozitivno utiče na fizičko i mentalno zdravlje građana.`,
+    bgImage: "url(ekologija2.png)",
   },
   {
-    title: "Andrićgrad",
-    subtitle: "GRAD OD KAMENA POSVEĆEN ANDRIĆU",
-    description: `Andrićgrad je kulturni, obrazovni, i turistički kompleks inspirisan djelima Ive Andrića, dobitnika Nobelove nagrade za književnost. Grad od kamena simbolizuje bogato kulturno naslijeđe Višegrada i Balkana, sa mješavinom arhitektonskih stilova iz različitih perioda istorije.`,
-    bgImage: "url(andricgrad.jpg)",
-  },
-  {
-    title: "Višegradska Banja",
-    subtitle: "IZVORI LJEKOVITE VODE",
-    description: `Višegradska Banja je poznata po svojim termalnim izvorima i ljekovitoj vodi koja pomaže u liječenju reumatskih i kožnih oboljenja. Idealno mjesto za opuštanje i rehabilitaciju u prelijepom prirodnom okruženju.`,
-    bgImage: "url(banja.jpg)",
-  },
-  {
-    title: "Istražite Višegrad",
-    subtitle: "VAŠA PUSTOLOVINA ČEKA",
-    description: `Višegrad je grad bogat istorijom, kulturom i prirodnim ljepotama, pružajući vam nezaboravno iskustvo. Od veličanstvenog Mosta Mehmed Paše Sokolovića do kulturnog kompleksa Andrićgrad i opuštanja u Višegradskoj Banji, svaki kutak ovog grada priča svoju jedinstvenu priču. Ne propustite priliku da istražite sve što Višegrad nudi i stvorite svoja vlastita nezaboravna sjećanja.`,
-    bgImage: "url(visegrad.jpg)",
-    url: "/map",
+    title: "",
+    subtitle: "",
+    description: `Ekologija je ključna za očuvanje prirodnih resursa koji su neophodni za život – čist vazduh, vodu i plodno tlo. Održavanje ekološke ravnoteže pomaže u smanjenju klimatskih promena i zagađenja, što direktno utiče na zdravlje ljudi i opstanak biljnih i životinjskih vrsta. Briga o životnoj sredini omogućava stabilnije uslove za život, sprečava degradaciju ekosistema i osigurava da buduće generacije mogu uživati u prirodnim lepotama i resursima planete.`,
+    bgImage: "url(ekologija3.png)",
   },
 ];
 
@@ -193,17 +180,6 @@ const HomePage: React.FC = () => {
                 <Typography variant="body1" sx={{ mb: 4 }}>
                   {section.description}
                 </Typography>
-                {index === 4 && (
-                  <Link
-                    style={{ textDecoration: "none", color: "white" }}
-                    to={section.url!}
-                  >
-                    <Button variant="text" color="inherit">
-                      Prikaži cijelu ponudu
-                      <ChevronRightIcon />
-                    </Button>
-                  </Link>
-                )}
               </Grid2>
             </Grid2>
 
